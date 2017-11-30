@@ -30,4 +30,8 @@ void translateBinToHexa(int trameBin[], char trameHexa[]);
 /* Initialise une trame binaire à 0 */
 void initTrame(int trameBin[]);
 
+/* Transforme une chaîne de caractères représentant un nombre en nombre */
+/* FAIT + VERIF */
+int strToDec(char number[]);
+
 #endif
