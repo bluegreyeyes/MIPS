@@ -9,6 +9,7 @@ void writeInFile(FILE* file, char data[]);
 int readRegister(FILE* file);
 
 /* Récupère une valeur immédiate ou un offset */
+/* FAIT + VERIF */
 int readImmValue(FILE* file);
 
 /* Récupère une adresse */

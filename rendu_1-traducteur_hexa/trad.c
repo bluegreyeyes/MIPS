@@ -26,3 +26,35 @@ int strToDec(char number[]){
 
 	return(dec_number);
 }
+
+int strHexaToDec(char hexa_number[]){
+
+	/* Variables */
+
+	int hexa_num = 0,
+	    pow = 1,
+	    len = 0,
+	    i;
+
+	/* Code */
+
+	while(hexa_number[len++] != '\0');
+
+	for(i = len-2 ; i > -1 ; i--){
+
+		/* If it's a digit, we compare it to the 0 ref. */
+		if(hexa_number[i] >= '0' && hexa_number[i] <= '9'){
+
+			hexa_num += (hexa_number[i] - '0') * pow;
+		}
+		/* If it's a letter, the ref. is 'a', we then add 1 and multiplie by 10 to obtain the correct value */
+		else{
+
+			hexa_num += (hexa_number[i] - 'a' + 10) * pow;
+		}
+
+		pow *= 16;
+	}
+
+	return(hexa_num);
+}
