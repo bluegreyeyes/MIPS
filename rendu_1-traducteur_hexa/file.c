@@ -4,6 +4,31 @@
 #include "file.h"
 #include "trad.h"
 
+
+FILE* openFile(char* filename, char* mode){
+	FILE * fdin = fopen(filename, mode);
+	if ( NULL == fdin )
+	{
+		fprintf(stderr, "Error opening file %s\n", filename);
+		perror("");
+		exit (EXIT_FAILURE);
+	}
+	return fdin;
+}
+
+
+
+void closeFile(char* filename, FILE* file){
+	if (fclose(file) == EOF)
+	{
+		fprintf(stderr, "Error closing file %s\n", filename);
+		perror("");
+		exit(EXIT_FAILURE);
+	}
+}
+
+
+
 void readInstr(FILE* file, char* instr){
 
 	/* Variables */
@@ -24,6 +49,8 @@ void readInstr(FILE* file, char* instr){
 	/* Adding null terminator at the end of the string */
 	instr[i-1] = '\0';
 }
+
+
 
 int readRegister(FILE* file){
 
@@ -58,6 +85,8 @@ int readRegister(FILE* file){
 	return(strToDec(reg_number));
 }
 
+
+
 int readImmValue(FILE* file){
 
 	/* Variables */
@@ -84,7 +113,7 @@ int readImmValue(FILE* file){
 
 		/* If the value is given in hexadecimal format, detects it and restart the capture of the string */
 		if(c == 'x'){
-		
+
 			i = -1;
 			hexa = 1;
 		}
