@@ -5,7 +5,7 @@
 void writeInFile(FILE* file, char data[]);
 
 /* Récupère un numéro de registre */
-/* FAIT + VERIF */
+/* FAIT + VERIF */ 
 int readRegister(FILE* file);
 
 /* Récupère une valeur immédiate ou un offset */
@@ -19,7 +19,7 @@ int readAddress(FILE* file);
 FILE* openFile(char* filename, char* mode);
 
 /* Ferme le fichier fourni */
-void closeFile(char* filename, FILE* file);
+void closeFile(FILE* file);
 
 /* Récupère l'op_code en tête d'instruction */
 /* FAIT + VERIF */

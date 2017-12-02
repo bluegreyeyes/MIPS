@@ -58,3 +58,60 @@ int strHexaToDec(char hexa_number[]){
 
 	return(hexa_num);
 }
+
+void translateBinTrameToHexa(int trameBin[], char trameHexa[]){
+
+	/* Variables */
+
+	int i, j;
+	int bin_halfword[4];
+
+	/* Code */
+
+	for(i = 0; i < 8; i++){
+
+		for(j = 0 ; j < 4 ; j++)
+			bin_halfword[j] = trameBin[4*i + j];
+
+		trameHexa[i] = binToHexa(bin_halfword);
+	}
+}
+
+char binToHexa(int bin_halfword[]){
+
+	/* Variables */
+
+	char hexa_char;
+	int dec_value;
+
+	/* Code */
+
+	dec_value = binToDec(bin_halfword, 4);
+
+	switch(dec_value){
+
+		case 0:
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+			hexa_char = '0' + dec_value;
+			break;
+
+		case 10:
+		case 11:
+		case 12:
+		case 13:
+		case 14:
+		case 15:
+			hexa_char = 'a' + (dec_value - 10);
+			break;
+	}
+
+	return(hexa_char);
+}
