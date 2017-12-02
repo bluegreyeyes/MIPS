@@ -4,6 +4,29 @@
 #include "file.h"
 #include "trad.h"
 
+FILE* openFile(char* filename, char* mode){
+	FILE * fdin = fopen(filename, mode);
+	if ( NULL == fdin )
+	{
+		fprintf(stderr, "Error opening file %s\n", filename);
+		perror("");
+		exit (EXIT_FAILURE);
+	}
+	return fdin;
+}
+
+
+
+void closeFile(char* filename, FILE* file){
+	if (fclose(file) == EOF)
+	{
+		fprintf(stderr, "Error closing file %s\n", filename);
+		perror("");
+		exit(EXIT_FAILURE);
+	}
+}
+
+
 void readInstr(FILE* file, char* instr){
 
 	/* Variables */
