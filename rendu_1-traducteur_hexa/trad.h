@@ -24,10 +24,6 @@ instr idInstr(char* instr);
 /* Ajoute à l'instruction une trame fournie (un champ) */
 void addTrame(int instr_code[], int index, int trame[], int trame_lengh);
 
-/* Traduit une trame binaire en hexadécimal */
-/* FAIT */
-void translateBinTrameToHexa(int trameBin[], char trameHexa[]);
-
 /* Initialise une trame binaire à 0 */
 void initTrame(int trameBin[]);
 
@@ -35,16 +31,20 @@ void initTrame(int trameBin[]);
 /* FAIT + VERIF */
 int strToDec(char number[]);
 
+/* Renvoie la valeur décimale correspondante à la trame binaire fournie */
+/* FAIT + VERIF */
+int binToDec(int bin_word[], int len);
+
+/* Renvoie le caractère hexa correspondant au tableau de 4 bits passé en param. */
+/* FAIT + VERIF */
+char binToHexa(int bin_halfword[]);
+
 /* Tansforme une chaîne de carac. représentant un nombre hexa en nombre décimal */
 /* FAIT + VERIF */
 int strHexaToDec(char hexa_number[]);
 
-/* Renvoie le caractère hexa correspondant au tableau de 4 bits passé en param. */
-/* FAIT */
-char binToHexa(int bin_halfword[]);
-
-/* Renvoie la valeur décimale correspondante à la trame binaire fournie */
-/* A FAIRE */
-int binToDec(int bin_word[], int len);
+/* Traduit une trame binaire en hexadécimal */
+/* FAIT + VERIF */
+void translateBinTrameToHexa(int trameBin[], char trameHexa[]);
 
 #endif

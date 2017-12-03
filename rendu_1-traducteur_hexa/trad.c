@@ -115,3 +115,22 @@ char binToHexa(int bin_halfword[]){
 
 	return(hexa_char);
 }
+
+int binToDec(int bin_word[], int len){
+
+	/* Variables */
+
+	int i,
+	    dec_number = 0,
+	    pow = 1;
+
+	/* Code */
+
+	for(i = len-1 ; i > -1 ; i--){
+
+		dec_number += bin_word[i] * pow;
+		pow *= 2;
+	}
+
+	return(dec_number);
+}
