@@ -3,6 +3,8 @@
 
 #include "trad.h"
 
+
+
 int strToDec(char number[]){
 
 	/* Variables */
@@ -26,6 +28,8 @@ int strToDec(char number[]){
 
 	return(dec_number);
 }
+
+
 
 int strHexaToDec(char hexa_number[]){
 
@@ -59,6 +63,8 @@ int strHexaToDec(char hexa_number[]){
 	return(hexa_num);
 }
 
+
+
 void translateBinTrameToHexa(int trameBin[], char trameHexa[]){
 
 	/* Variables */
@@ -76,6 +82,8 @@ void translateBinTrameToHexa(int trameBin[], char trameHexa[]){
 		trameHexa[i] = binToHexa(bin_halfword);
 	}
 }
+
+
 
 char binToHexa(int bin_halfword[]){
 
@@ -115,6 +123,8 @@ char binToHexa(int bin_halfword[]){
 
 	return(hexa_char);
 }
+
+
 
 int binToDec(int bin_word[], int len){
 
