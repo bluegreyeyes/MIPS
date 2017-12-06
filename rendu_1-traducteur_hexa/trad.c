@@ -4,6 +4,13 @@
 #include "trad.h"
 
 
+instr idInstr(char* instr){
+	
+}
+
+
+
+
 
 int strToDec(char number[]){
 
