@@ -87,7 +87,7 @@ int readRegister(FILE* file){
 		reg_number[i] = c;
 		i++;
 
-	}while(c != ',' && c != ' ' && c != '\n');
+	}while(c != ',' && c != ' ' && c != '\n' && c != ')');
 
 	reg_number[i-1] = '\0';
 
@@ -102,8 +102,9 @@ int readImmValue(FILE* file){
 	/* Variables */
 
 	int i = 0,
+	    negative = 0,		/* Flag checking if the value is negative */
 	    hexa = 0;			/* Flag checking if the value is in hexadecimal or decimal format */
-	char value[6];			/* An immediat value or an offset is max 5 digits long + null terminator */
+	char value[7];			/* An immediat value or an offset is max 5 digits long + null terminator + possible sign */
 	char c;
 
 	/* Code */
@@ -112,6 +113,14 @@ int readImmValue(FILE* file){
 	do
 	{
 		c = fgetc(file);
+
+		/* If a minus is detected, save the information in the negative flag */
+		if(c == '-'){
+
+			printf("Détection du -\n");
+			negative = 1;
+		}
+
 	}while( c < '0' || c > '9');
 
 	value[i++] = c;
@@ -134,12 +143,17 @@ int readImmValue(FILE* file){
 
 		i++;
 
-	}while(c != ' ' && c != '\n');
+	}while(c != ' ' && c != '\n' && c != '(');
 
 	value[i-1] = '\0';
 
 	if(hexa){
 		return(strHexaToDec(value));
+	}
+	else if(negative){
+
+		printf("Retour d'une val. < 0.\n");
+		return(-1 * strToDec(value));
 	}
 	else{
 		return(strToDec(value));
