@@ -1,7 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "trad.h"
+#include "file.h"
 
 int strToDec(char number[]){
 
@@ -135,32 +137,109 @@ int binToDec(int bin_word[], int len){
 	return(dec_number);
 }
 
-void strToBinTrame(char reg_number[], int reg_trame[], int trame_len){
+void decToBinTrame(int number, int trame[], int trame_len){
 
 	/* Variables */
 
-	int i = 0,
-	    value = 0;
+	int i = 0;
 
 	int *temp = NULL;
 	
 	/* Code */
 
-	value = strToDec(reg_number);
-
 	temp = (int *) malloc(trame_len * sizeof(int));
 
-	while(value != 0){
+	while(number != 0){
 
-		temp[i] = value % 2;
-		value /= 2;
+		temp[i] = number % 2;
+		number /= 2;
 		i++;
 	}
 
 	for(i = trame_len - 1 ; i > -1 ; i--){
 
-		reg_trame[i] = temp[trame_len - 1 - i];
+		trame[trame_len - 1 - i] = temp[i];
 	}
 
 	free(temp);
+}
+
+instr idInstr(char *instr){
+
+	if(!strcmp(instr, "ADD")){
+		return(ADD);
+	}
+	else if(!strcmp(instr, "ADDI")){
+		return(ADDI);
+	}
+	else{
+		printf("Instruction non reconnue.\n");
+		return(12);
+	}
+}
+
+
+void addTrame(int trameBin[], int index, int trame[], int trame_lengh){
+
+	/* Variables */
+
+	int i;
+
+	/* Code */
+
+	for (i = 0; i < trame_lengh; i++){
+		trameBin[index + i] = trame [i];
+	}
+}
+
+
+void initTrame(int trameBin[], int length){
+
+		/* Variables */
+
+	int i;
+
+	/* Code */
+
+	for (i=0; i < length; i++){
+		trameBin[i] = 0;
+	}
+}
+
+void addRegCode(FILE* file, int bin_trame[], int index){
+
+	/* Variables */
+
+	int reg_trame[TRAME_REG_LEN];
+
+	/* Code */
+
+	initTrame(reg_trame, TRAME_REG_LEN);
+	
+	decToBinTrame(readRegister(file), reg_trame, TRAME_REG_LEN);
+	addTrame(bin_trame, index, reg_trame, TRAME_REG_LEN);
+}
+
+void addImmValueCode(FILE* file, int bin_trame[], int index){
+
+	/* Variables */
+
+	int imm_val_trame[TRAME_IMM_LEN];
+
+	/* Code */
+
+	initTrame(imm_val_trame, TRAME_IMM_LEN);
+	
+	decToBinTrame(readImmValue(file), imm_val_trame, TRAME_IMM_LEN);
+	addTrame(bin_trame, index, imm_val_trame, TRAME_IMM_LEN);
+}
+
+void afficherTrame(int bin_trame[]){
+
+	int i;
+
+	for(i = 0; i < TRAME_BIN_LEN ; i++)
+		printf("%d ", bin_trame[i]);
+
+	printf("\n");
 }

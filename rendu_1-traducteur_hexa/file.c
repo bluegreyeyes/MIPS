@@ -27,8 +27,8 @@ void closeFile(char* filename, FILE* file){
 	}
 }
 
-void writeInFile(FILE *file char data[]){
-	fprintf(file, "%s", data[]);
+void writeInFile(FILE *file, char data[]){
+	fprintf(file, "%s\n", data);
 }
 
 
