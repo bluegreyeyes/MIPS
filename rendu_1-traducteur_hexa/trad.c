@@ -141,7 +141,8 @@ void decToBinTrame(int number, int trame[], int trame_len){
 
 	/* Variables */
 
-	int i = 0;
+	int i = 0,
+	    negative = 0;
 
 	int *temp = NULL;
 	
@@ -149,6 +150,18 @@ void decToBinTrame(int number, int trame[], int trame_len){
 
 	temp = (int *) malloc(trame_len * sizeof(int));
 
+	/* Cleaning the memory before using it */
+	for(i = 0 ; i < trame_len - 1 ; i++)
+		temp[i] = 0;
+
+	if(number < 0){
+		number *= -1;
+		negative = 1;
+	}
+
+	printf("N = %d\n", number);
+
+	i = 0;
 	while(number != 0){
 
 		temp[i] = number % 2;
@@ -161,20 +174,43 @@ void decToBinTrame(int number, int trame[], int trame_len){
 		trame[trame_len - 1 - i] = temp[i];
 	}
 
+	if(negative){
+
+		printf("Negatif !\n");
+
+		for(i = 0 ; i < trame_len ; i++){
+			if(trame[i] == 0){
+				trame[i] += 1;
+			}
+			else{
+				trame[i] -= 1;
+			}
+		}
+
+		i = trame_len - 1;
+		while(trame[i]){ i--; }
+
+		trame[i] = 1;
+	}
+
 	free(temp);
 }
 
 instr idInstr(char *instr){
 
-	if(!strcmp(instr, "ADD")){
-		return(ADD);
-	}
-	else if(!strcmp(instr, "ADDI")){
-		return(ADDI);
-	}
-	else{
-		printf("Instruction non reconnue.\n");
-		return(12);
+	/* Variables */
+
+	char instructions[26][INSTR_MAX_LEN] = {"ADD", "ADDI", "AND", "BEQ", "BGTZ", "BLEZ", "BNE", "DIV", "J", "JAL", "JR", "LUI", "LW", "MFHI", "MFLO", "MULT", "NOP", "OR", "ROTR", "SLL", "SLT", "SRL", "SUB", "SW", "SYSCALL", "XOR"};
+
+	int i;
+
+	/* Code */
+
+	for(i = 0 ; i < 26 ; i++){
+
+		if(!strcmp(instr, instructions[i])){
+			return(i);
+		}
 	}
 }
 
@@ -243,3 +279,18 @@ void afficherTrame(int bin_trame[]){
 
 	printf("\n");
 }
+
+void addAddressCode(FILE* file, int bin_trame[], int index){
+
+	/* Variables */
+
+	int address_trame[TRAME_ADDRESS_LEN];
+
+	/* Code */
+
+	initTrame(address_trame, TRAME_ADDRESS_LEN);
+
+	decToBinTrame(readImmValue(file), address_trame, TRAME_ADDRESS_LEN);
+	addTrame(bin_trame, index, address_trame, TRAME_ADDRESS_LEN);
+}	
+

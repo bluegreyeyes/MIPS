@@ -3,11 +3,14 @@
 
 /* Constantes */
 
+/* Taille d'un champ adresse */
+#define TRAME_ADDRESS_LEN 26
+
 /* Taille d'une trame d'instruction binaire */
 #define TRAME_BIN_LEN 32
 
 /* Taille max d'une instruction assembleur MIPS */
-#define INSTR_MAX_LEN 5
+#define INSTR_MAX_LEN 8
 
 /* Taille d'une trame d'instruction hexadécimale */
 #define TRAME_HEXA_LEN 9
@@ -67,5 +70,8 @@ void addRegCode(FILE* file, int bin_trame[], int index);
 void addImmValueCode(FILE* file, int bin_trame[], int index);
 
 void afficherTrame(int bin_trame[]);
+
+/* Même fonction que la précédente, avec une adresse */
+void addAddressCode(FILE* file, int bin_trame[], int index);
 
 #endif

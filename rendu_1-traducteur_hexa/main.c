@@ -70,17 +70,43 @@ int main(int argc, char* argv[]){
 
 			case ADD:
 
-				/* Adding the instruction code */
 				if(!opcode_ok){
 					addTrame(bin_trame, 26, (int []){1, 0, 0, 0, 0, 0}, 6);
 					opcode_ok = 1;
 				}
 
+			case SUB:
+
+				if(!opcode_ok){
+					addTrame(bin_trame, 26, (int []){1, 0, 0, 0, 1, 0}, 6);
+					opcode_ok = 1;
+				}
+
 			case AND:
 
-				/* Adding the instruction code */
 				if(!opcode_ok){
 					addTrame(bin_trame, 26, (int []){1, 0, 0, 1, 0, 0}, 6);
+					opcode_ok = 1;
+				}
+
+			case OR:
+
+				if(!opcode_ok){
+					addTrame(bin_trame, 26, (int []){1, 0, 0, 1, 0, 1}, 6);
+					opcode_ok = 1;
+				}
+
+			case XOR:
+
+				if(!opcode_ok){
+					addTrame(bin_trame, 26, (int []){1, 0, 0, 1, 1, 0}, 6);
+					opcode_ok = 1;
+				}
+
+			case SLT:
+
+				if(!opcode_ok){
+					addTrame(bin_trame, 26, (int []){1, 0, 1, 0, 1, 0}, 6);
 					opcode_ok = 1;
 				}
 
@@ -91,9 +117,38 @@ int main(int argc, char* argv[]){
 
 				break;
 
+
+
+			case ROTR:
+
+				if(!opcode_ok){
+					addTrame(bin_trame, 26, (int []){0, 0, 0, 0, 1, 0}, 6);
+					opcode_ok = 1;
+				}
+
+				/* Adding a bit */
+				addTrame(bin_trame, 10, (int []){1}, 1);
+
+			case SRL:
+
+				if(!opcode_ok){
+					addTrame(bin_trame, 26, (int []){0, 0, 0, 0, 1, 0}, 6);
+					opcode_ok = 1;
+				}
+
+			case SLL:
+
+				/* Reading registers */
+				addRegCode(input_file, bin_trame, 16);
+				addRegCode(input_file, bin_trame, 11);
+				addRegCode(input_file, bin_trame, 21);
+
+				break;
+
+
+
 			case ADDI:
 
-				/* Adding the instruction code */
 				if(!opcode_ok){
 					addTrame(bin_trame, 0, (int []){0, 0, 1, 0, 0, 0}, 6);
 					opcode_ok = 1;
@@ -101,7 +156,6 @@ int main(int argc, char* argv[]){
 
 			case BEQ:
 
-				/* Adding the instruction code */
 				if(!opcode_ok){
 					addTrame(bin_trame, 0, (int []){0, 0, 0, 1, 0, 0}, 6);
 					opcode_ok = 1;
@@ -109,7 +163,6 @@ int main(int argc, char* argv[]){
 
 			case BNE:
 
-				/* Adding the instruction code */
 				if(!opcode_ok){
 					addTrame(bin_trame, 0, (int []){0, 0, 0, 1, 0, 1}, 6);
 					opcode_ok = 1;
@@ -123,11 +176,14 @@ int main(int argc, char* argv[]){
 				/* Lecture de la valeur imm */
 				addImmValueCode(input_file, bin_trame, 16);
 
+				afficherTrame(bin_trame);
+
 				break;
+
+
 
 			case BGTZ:
 
-				/* Adding the instruction code */
 				if(!opcode_ok){
 					addTrame(bin_trame, 0, (int []){0, 0, 0, 1, 1, 1}, 6);
 					opcode_ok = 1;
@@ -135,7 +191,6 @@ int main(int argc, char* argv[]){
 
 			case BLEZ:
 
-				/* Adding the instruction code */
 				if(!opcode_ok){
 					addTrame(bin_trame, 0, (int []){0, 0, 0, 1, 1, 0}, 6);
 					opcode_ok = 1;
@@ -150,6 +205,26 @@ int main(int argc, char* argv[]){
 
 				break;
 
+
+
+			case LUI:
+
+				if(!opcode_ok){
+					addTrame(bin_trame, 0, (int []){0, 0, 1, 1, 1, 1}, 6);
+					opcode_ok = 1;
+				}
+
+
+				/* Retrieving register */
+				addRegCode(input_file, bin_trame, 11);
+
+				/* Retrieving offset */
+				addImmValueCode(input_file, bin_trame, 16);
+
+				break;
+
+
+
 			case DIV:
 
 				if(!opcode_ok){
@@ -157,10 +232,116 @@ int main(int argc, char* argv[]){
 					opcode_ok = 1;
 				}
 
+			case MULT:
+
+				if(!opcode_ok){
+					addTrame(bin_trame, 26, (int []){0, 1, 1, 0, 0, 0}, 6);
+					opcode_ok = 1;
+				}
+
+
 				/* Retrieving registers */
 				addRegCode(input_file, bin_trame, 6);
 				addRegCode(input_file, bin_trame, 11);
 
+				break;
+
+
+
+			case JR:
+
+				if(!opcode_ok){
+					addTrame(bin_trame, 26, (int []){0, 0, 1, 0, 0, 0}, 6);
+					opcode_ok = 1;
+				}
+
+				/* Retrieving register */
+				addRegCode(input_file, bin_trame, 6);
+
+				break;
+
+
+
+			case MFHI:
+
+				if(!opcode_ok){
+					addTrame(bin_trame, 26, (int []){0, 1, 0, 0, 0, 0}, 6);
+					opcode_ok = 1;
+				}
+
+			case MFLO:
+
+				if(!opcode_ok){
+					addTrame(bin_trame, 26, (int []){0, 1, 0, 0, 1, 0}, 6);
+					opcode_ok = 1;
+				}
+
+				/* Retrieving register */
+				addRegCode(input_file, bin_trame, 16);
+
+				break;
+
+
+
+			case J:
+
+				if(!opcode_ok){
+					addTrame(bin_trame, 0, (int []){0, 0, 0, 0, 1, 0}, 6);
+					opcode_ok = 1;
+				}
+
+			case JAL:
+
+				if(!opcode_ok){
+					addTrame(bin_trame, 0, (int []){0, 0, 0, 0, 1, 1}, 6);
+					opcode_ok = 1;
+				}
+
+
+				/* Retrieving address */
+				addAddressCode(input_file, bin_trame, 6);
+
+				break;
+
+
+
+			case LW:
+
+				if(!opcode_ok){
+					addTrame(bin_trame, 0, (int []){1, 0, 0, 0, 1, 1}, 6);
+					opcode_ok = 1;
+				}
+
+			case SW:
+
+				if(!opcode_ok){
+					addTrame(bin_trame, 0, (int []){1, 0, 1, 0, 1, 1}, 6);
+					opcode_ok = 1;
+				}
+
+				/* Retrieving register */
+				addRegCode(input_file, bin_trame, 11);
+
+				/* Retrieving offset */
+				addImmValueCode(input_file, bin_trame, 16);
+
+				/* Retrieving register */
+				addRegCode(input_file, bin_trame, 6);
+
+				break;
+
+
+
+			case SYSCALL:
+
+				addTrame(bin_trame, 26, (int []){0, 0, 1, 1, 0, 0}, 6);
+
+				break;
+
+
+
+			case NOP:
+				break;
 
 			default:
 				printf("Instruction non prise en charge.\n");
