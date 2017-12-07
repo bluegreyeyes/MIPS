@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #include "file.h"
 #include "trad.h"
@@ -24,6 +25,10 @@ void closeFile(char* filename, FILE* file){
 		perror("");
 		exit(EXIT_FAILURE);
 	}
+}
+
+void writeInFile(FILE *file char data[]){
+	fprintf(file, "%s", data[]);
 }
 
 

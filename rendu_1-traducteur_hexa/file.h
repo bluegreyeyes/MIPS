@@ -19,7 +19,7 @@ int readAddress(FILE* file);
 FILE* openFile(char* filename, char* mode);
 
 /* Ferme le fichier fourni */
-void closeFile(FILE* file);
+void closeFile(char* filename, FILE* file);
 
 /* Récupère l'op_code en tête d'instruction */
 /* FAIT + VERIF */

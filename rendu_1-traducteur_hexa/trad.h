@@ -23,7 +23,7 @@
 
 /* Structures */
 
-typedef enum instr {/* TODO : Taper la liste des instr */} instr;
+typedef enum instr {ADD, ADDI, AND, BEQ, BGTZ, BLEZ, BNE, DIV, J, JAL, JR, LUI, LW, MFHI, MFLO, MULT, NOP, OR, ROTR, SLL, SLT, SRL, SUB, SW, SYSCALL, XOR} instr;
 
 /* Prototypes */
 
