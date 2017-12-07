@@ -27,9 +27,8 @@ void closeFile(char* filename, FILE* file){
 	}
 }
 
-
-void writeInFile(FILE* file, char data[]){
-	 fprintf(file, "%s ",data[]);
+void writeInFile(FILE *file char data[]){
+	fprintf(file, "%s", data[]);
 }
 
 
@@ -48,6 +47,11 @@ void readInstr(FILE* file, char* instr){
 		c = fgetc(file);
 		instr[i] = c;
 		i++;
+
+		/* Detect blank lines and reset the instruction's capture */
+		if(c == '\n')
+			i = 0;
+
 	}while(c != ' ' && !feof(file));
 
 	/* Adding null terminator at the end of the string */
@@ -57,7 +61,6 @@ void readInstr(FILE* file, char* instr){
 	if(feof(file))
 		instr[0] = '\0';
 }
-
 
 int readRegister(FILE* file){
 
@@ -93,6 +96,7 @@ int readRegister(FILE* file){
 }
 
 
+
 int readImmValue(FILE* file){
 
 	/* Variables */
@@ -119,7 +123,7 @@ int readImmValue(FILE* file){
 
 		/* If the value is given in hexadecimal format, detects it and restart the capture of the string */
 		if(c == 'x'){
-
+		
 			i = -1;
 			hexa = 1;
 		}

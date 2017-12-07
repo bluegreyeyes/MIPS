@@ -27,8 +27,12 @@ int main(int argc, char* argv[]){
 	/* Variables */
 	int bin_trame[TRAME_BIN_LEN] = {0},
 	    fill_trame[TRAME_BIN_LEN] = {0},
+	    opcode_trame[TRAME_OPCODE_LEN] = {0},
+	    reg_trame[TRAME_REG_LEN] = {0},
+	    imm_val_trame[TRAME_IMM_LEN] = {0},
 	    reg = 0,
-	    imm_value = 0;
+	    imm_value = 0,
+	    i = 0;
 
 	char hexa_trame[TRAME_HEXA_LEN] = "",
 	     instr[INSTR_MAX_LEN] = "";
@@ -37,7 +41,7 @@ int main(int argc, char* argv[]){
 	     *hexa_file = NULL;
 
 	/* Initialisation */
-	initTrame(fill_trame);
+	initTrame(fill_trame, 32);
 
 	/* Check if enough arguments are provided */
 	if(argc < 3){
@@ -62,9 +66,87 @@ int main(int argc, char* argv[]){
 		if(instr[0] == '\0')
 			break;
 
-		initTrame(bin_trame);
+		initTrame(bin_trame, 32);
 
 		switch(ifInstr(instr)){
+
+			case ADD:
+
+				/* Adding the instruction code */
+				addTrame(bin_trame, 25, {1, 0, 0, 0, 0, 0}, 6);
+
+			case AND:
+
+				/* Adding the instruction code */
+				addTrame(bin_trame, 25, {1, 0, 0, 1, 0, 0}, 6);
+
+				for(i = 0 ; i < 3 ; i++){
+
+					initTrame(reg_trame, TRAME_REG_LEN);
+					reg = readRegister(input_file);
+
+					decToBinTrame(reg, reg_trame, TRAME_REG_LEN);
+
+					addTrame(bin_trame, 6 + i*5, reg_trame, 5);
+				}
+
+				break;
+
+			case ADDI:
+
+				/* Adding the instruction code */
+				addTrame(bin_trame, 0, {1, 0, 0, 0, 0, 0}, 6);
+
+			case BEQ:
+
+				/* Adding the instruction code */
+				addTrame(bin_trame, 0, {0, 0, 0, 1, 0, 0}, 6);
+
+				for(i = 0 ; i < 2 ; i++){
+
+					initTrame(reg_trame, TRAME_REG_LEN);
+					reg = readRegister(input_file);
+
+					decToBinTrame(reg, reg_trame, TRAME_REG_LEN);
+
+					addTrame(bin_trame, 6 + 5*i, reg_trame, 5);
+				}
+
+				initTrame(imm_val_trame, TRAME_IMM_LEN);
+				imm_value = readImmValue(input_file);
+
+				decToBinTrame(imm_value, imm_val_trame, TRAME_REG_LEN);
+
+				addTrame(bin_trame, 15, imm_val_trame, TRAME_REG_LEN);
+
+				break;
+
+			case BGTZ:
+
+				/* Adding the instruction code */
+				addTrame(bin_trame, 0, {0, 0, 0, 1, 1, 1}, 6);
+
+				/* Retrieving register */
+				initTrame(reg_trame, TRAME_REG_LEN);
+				reg = readRegister(input_file);
+
+				decToBinTrame(reg, reg_trame, TRAME_REG_LEN);
+
+				addTrame(bin_trame, 6 + 5*i, reg_trame, 5);
+
+				/* Retrieving offset */
+				initTrame(imm_val_trame, TRAME_IMM_LEN);
+				imm_value = readImmValue(input_file);
+
+				decToBinTrame(imm_value, imm_val_trame, TRAME_REG_LEN);
+
+				addTrame(bin_trame, 15, imm_val_trame, TRAME_REG_LEN);
+
+				break;
+
+			default:
+				printf("Instruction non prise en charge.\n");
+				break;
 
 		}
 
