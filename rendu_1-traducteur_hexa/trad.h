@@ -34,7 +34,7 @@ instr idInstr(char* instr);
 void addTrame(int instr_code[], int index, int trame[], int trame_lengh);
 
 /* Initialise une trame binaire à 0 */
-void initTrame(int trameBin[]);
+void initTrame(int trameBin[], int length);
 
 /* Transforme une chaîne de caractères représentant un nombre décimal en nombre décimal */
 /* FAIT + VERIF */
@@ -53,10 +53,19 @@ char binToHexa(int bin_halfword[]);
 int strHexaToDec(char hexa_number[]);
 
 /* Retourne la trame binaire qui correspond au nombre décimal contenu dans la chaîne reg_number */
-strToBinTrame(char reg_number[], int reg_trame[], int trame_len);
+void decToBinTrame(int number, int trame[], int trame_len);
 
 /* Traduit une trame binaire en hexadécimal */
 /* FAIT + VERIF */
 void translateBinTrameToHexa(int trameBin[], char trameHexa[]);
+
+/* Ajoute à la trame binaire le code correspondant au registre lu, à l'index fourni */
+/* FAIT */
+void addRegCode(FILE* file, int bin_trame[], int index);
+
+/* Même fonction que la précédente, avec une valeur immédiate/offset */
+void addImmValueCode(FILE* file, int bin_trame[], int index);
+
+void afficherTrame(int bin_trame[]);
 
 #endif
