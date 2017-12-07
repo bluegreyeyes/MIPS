@@ -3,15 +3,6 @@
 
 #include "trad.h"
 
-
-instr idInstr(char* instr){
-	
-}
-
-
-
-
-
 int strToDec(char number[]){
 
 	/* Variables */
@@ -35,8 +26,6 @@ int strToDec(char number[]){
 
 	return(dec_number);
 }
-
-
 
 int strHexaToDec(char hexa_number[]){
 
@@ -70,8 +59,6 @@ int strHexaToDec(char hexa_number[]){
 	return(hexa_num);
 }
 
-
-
 void translateBinTrameToHexa(int trameBin[], char trameHexa[]){
 
 	/* Variables */
@@ -89,8 +76,6 @@ void translateBinTrameToHexa(int trameBin[], char trameHexa[]){
 		trameHexa[i] = binToHexa(bin_halfword);
 	}
 }
-
-
 
 char binToHexa(int bin_halfword[]){
 
@@ -131,8 +116,6 @@ char binToHexa(int bin_halfword[]){
 	return(hexa_char);
 }
 
-
-
 int binToDec(int bin_word[], int len){
 
 	/* Variables */
@@ -150,4 +133,34 @@ int binToDec(int bin_word[], int len){
 	}
 
 	return(dec_number);
+}
+
+void strToBinTrame(char reg_number[], int reg_trame[], int trame_len){
+
+	/* Variables */
+
+	int i = 0,
+	    value = 0;
+
+	int *temp = NULL;
+	
+	/* Code */
+
+	value = strToDec(reg_number);
+
+	temp = (int *) malloc(trame_len * sizeof(int));
+
+	while(value != 0){
+
+		temp[i] = value % 2;
+		value /= 2;
+		i++;
+	}
+
+	for(i = trame_len - 1 ; i > -1 ; i--){
+
+		reg_trame[i] = temp[trame_len - 1 - i];
+	}
+
+	free(temp);
 }
