@@ -25,4 +25,10 @@ void closeFile(char* filename, FILE* file);
 /* FAIT + VERIF */
 void readInstr(FILE* file, char* instr);
 
+/* Passe à la ligne suivante */
+void nextLine(FILE *file);
+
+/* Test la présence d'un commentaire en fin de ligne */
+int testComment(FILE *file);
+
 #endif

@@ -46,6 +46,13 @@ void readInstr(FILE* file, char* instr){
 	{
 		c = fgetc(file);
 		instr[i] = c;
+
+		if(c == '\n' && i == 0)
+			return;
+
+		if(c == '#' && i == 0)
+			return;
+
 		i++;
 		
 	}while(c != ' ' && c != '\n' && !feof(file));
@@ -81,6 +88,7 @@ int readRegister(FILE* file){
 	{
 		c = fgetc(file);
 		reg_number[i] = c;
+
 		i++;
 
 	}while(c != ',' && c != ' ' && c != '\n' && c != ')');
@@ -153,5 +161,25 @@ int readImmValue(FILE* file){
 	}
 	else{
 		return(strToDec(value));
+	}
+}
+
+void nextLine(FILE *file){
+
+	while(fgetc(file) != '\n');
+}
+
+int testComment(FILE *file){
+
+	char c = fgetc(file);
+
+	if(c == ' '){
+		printf("Esp detected\n");
+		return(1);
+	}
+	else{
+		printf("No esp\n");
+		ungetc(c, file);
+		return(0);
 	}
 }
