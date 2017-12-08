@@ -26,11 +26,10 @@ int main(int argc, char* argv[]){
 	 
 	/* Variables */
 	int bin_trame[TRAME_BIN_LEN] = {0},
-	    imm_val_trame[TRAME_IMM_LEN] = {0},
-	    imm_value = 0,
 	    i = 0;
 
-	int opcode_ok = 0;
+	int opcode_ok = 0,
+	    blank_line = 0;
 
 	char hexa_trame[TRAME_HEXA_LEN] = "",
 	     instr[INSTR_MAX_LEN] = "";
@@ -54,18 +53,24 @@ int main(int argc, char* argv[]){
 
 	do
 	{
-
+		blank_line = 0;
 		readInstr(input_file, instr);
 
 		/* We have reached the end of the file, exiting the loop */
 		if(instr[0] == '\0')
 			break;
 
+		if(instr[0] == '\n'){
+			printf("Ligne blanche\n");
+			blank_line = 1;
+		}
+
 		/* Initialisation de la trame et du flag d'opcode */
 		initTrame(bin_trame, 32);
 		opcode_ok = 0;
 
 		/* Identification de l'instruction et récupération des opérandes */
+		if(!blank_line){
 		switch(idInstr(instr)){
 
 			case ADD:
@@ -341,6 +346,9 @@ int main(int argc, char* argv[]){
 
 
 			case NOP:
+
+				afficherTrame(bin_trame);
+
 				break;
 
 			default:
@@ -354,6 +362,7 @@ int main(int argc, char* argv[]){
 
 		/* Writing hexa trame in the new file */
 		writeInFile(hexa_file, hexa_trame);
+		}
 
 	}while(1);
 

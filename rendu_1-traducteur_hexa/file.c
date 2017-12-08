@@ -47,12 +47,8 @@ void readInstr(FILE* file, char* instr){
 		c = fgetc(file);
 		instr[i] = c;
 		i++;
-
-		/* Detect blank lines and reset the instruction's capture */
-		if(c == '\n')
-			i = 0;
-
-	}while(c != ' ' && !feof(file));
+		
+	}while(c != ' ' && c != '\n' && !feof(file));
 
 	/* Adding null terminator at the end of the string */
 	instr[i-1] = '\0';
