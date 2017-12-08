@@ -170,8 +170,6 @@ void decToBinTrame(int number, int trame[], int trame_len){
 		negative = 1;
 	}
 
-	printf("N = %d\n", number);
-
 	i = 0;
 	while(number != 0){
 
