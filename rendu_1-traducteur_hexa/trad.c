@@ -5,6 +5,7 @@
 #include "trad.h"
 #include "file.h"
 
+
 int strToDec(char number[]){
 
 	/* Variables */
@@ -28,6 +29,8 @@ int strToDec(char number[]){
 
 	return(dec_number);
 }
+
+
 
 int strHexaToDec(char hexa_number[]){
 
@@ -61,6 +64,8 @@ int strHexaToDec(char hexa_number[]){
 	return(hexa_num);
 }
 
+
+
 void translateBinTrameToHexa(int trameBin[], char trameHexa[]){
 
 	/* Variables */
@@ -78,6 +83,8 @@ void translateBinTrameToHexa(int trameBin[], char trameHexa[]){
 		trameHexa[i] = binToHexa(bin_halfword);
 	}
 }
+
+
 
 char binToHexa(int bin_halfword[]){
 
@@ -118,6 +125,8 @@ char binToHexa(int bin_halfword[]){
 	return(hexa_char);
 }
 
+
+
 int binToDec(int bin_word[], int len){
 
 	/* Variables */
@@ -137,6 +146,8 @@ int binToDec(int bin_word[], int len){
 	return(dec_number);
 }
 
+
+
 void decToBinTrame(int number, int trame[], int trame_len){
 
 	/* Variables */
@@ -145,7 +156,7 @@ void decToBinTrame(int number, int trame[], int trame_len){
 	    negative = 0;
 
 	int *temp = NULL;
-	
+
 	/* Code */
 
 	temp = (int *) malloc(trame_len * sizeof(int));
@@ -196,6 +207,8 @@ void decToBinTrame(int number, int trame[], int trame_len){
 	free(temp);
 }
 
+
+
 instr idInstr(char *instr){
 
 	/* Variables */
@@ -215,6 +228,7 @@ instr idInstr(char *instr){
 }
 
 
+
 void addTrame(int trameBin[], int index, int trame[], int trame_lengh){
 
 	/* Variables */
@@ -227,6 +241,7 @@ void addTrame(int trameBin[], int index, int trame[], int trame_lengh){
 		trameBin[index + i] = trame [i];
 	}
 }
+
 
 
 void initTrame(int trameBin[], int length){
@@ -242,6 +257,8 @@ void initTrame(int trameBin[], int length){
 	}
 }
 
+
+
 void addRegCode(FILE* file, int bin_trame[], int index){
 
 	/* Variables */
@@ -251,10 +268,12 @@ void addRegCode(FILE* file, int bin_trame[], int index){
 	/* Code */
 
 	initTrame(reg_trame, TRAME_REG_LEN);
-	
+
 	decToBinTrame(readRegister(file), reg_trame, TRAME_REG_LEN);
 	addTrame(bin_trame, index, reg_trame, TRAME_REG_LEN);
 }
+
+
 
 void addImmValueCode(FILE* file, int bin_trame[], int index){
 
@@ -265,20 +284,12 @@ void addImmValueCode(FILE* file, int bin_trame[], int index){
 	/* Code */
 
 	initTrame(imm_val_trame, TRAME_IMM_LEN);
-	
+
 	decToBinTrame(readImmValue(file), imm_val_trame, TRAME_IMM_LEN);
 	addTrame(bin_trame, index, imm_val_trame, TRAME_IMM_LEN);
 }
 
-void afficherTrame(int bin_trame[]){
 
-	int i;
-
-	for(i = 0; i < TRAME_BIN_LEN ; i++)
-		printf("%d ", bin_trame[i]);
-
-	printf("\n");
-}
 
 void addAddressCode(FILE* file, int bin_trame[], int index){
 
@@ -292,5 +303,4 @@ void addAddressCode(FILE* file, int bin_trame[], int index){
 
 	decToBinTrame(readImmValue(file), address_trame, TRAME_ADDRESS_LEN);
 	addTrame(bin_trame, index, address_trame, TRAME_ADDRESS_LEN);
-}	
-
+}

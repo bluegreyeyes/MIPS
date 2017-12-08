@@ -5,6 +5,8 @@
 #include "file.h"
 #include "trad.h"
 
+
+
 FILE* openFile(char* filename, char* mode){
 	FILE * fdin = fopen(filename, mode);
 	if ( NULL == fdin )
@@ -27,9 +29,12 @@ void closeFile(char* filename, FILE* file){
 	}
 }
 
+
+
 void writeInFile(FILE *file, char data[]){
 	fprintf(file, "%s\n", data);
 }
+
 
 
 void readInstr(FILE* file, char* instr){
@@ -54,7 +59,7 @@ void readInstr(FILE* file, char* instr){
 			return;
 
 		i++;
-		
+
 	}while(c != ' ' && c != '\n' && !feof(file));
 
 	/* Adding null terminator at the end of the string */
@@ -64,6 +69,8 @@ void readInstr(FILE* file, char* instr){
 	if(feof(file))
 		instr[0] = '\0';
 }
+
+
 
 int readRegister(FILE* file){
 
@@ -136,7 +143,7 @@ int readImmValue(FILE* file){
 
 		/* If the value is given in hexadecimal format, detects it and restart the capture of the string */
 		if(c == 'x'){
-		
+
 			i = -1;
 			hexa = 1;
 		}
@@ -164,21 +171,26 @@ int readImmValue(FILE* file){
 	}
 }
 
+
+
 void nextLine(FILE *file){
 
 	while(fgetc(file) != '\n');
 }
 
+
+
 int testComment(FILE *file){
 
 	char c = fgetc(file);
 
+	/* Search for the presence of a blank space */
 	if(c == ' '){
-		printf("Esp detected\n");
+		/* If a blank space is detected, return true */
 		return(1);
 	}
 	else{
-		printf("No esp\n");
+		/* If no blank space is detected, reputs the red character and return false */
 		ungetc(c, file);
 		return(0);
 	}
