@@ -42,8 +42,6 @@ int main(int argc, char* argv[]){
 		exit(-1);
 	}
 
-	/* TODO : Fonction de sécurisation du nom du fichier */
-
 	/* Opening the needed files to proceed */
 	input_file = openFile(argv[1], "r");
 	hexa_file = openFile(argv[2], "w");
@@ -67,11 +65,11 @@ int main(int argc, char* argv[]){
 			continue;
 		}
 
-		/* Initialisation de la trame et du flag d'opcode */
+		/* Init. of the trame and opcode flag */
 		initTrame(bin_trame, 32);
 		opcode_ok = 0;
 
-		/* Identification de l'instruction et récupération des opérandes */
+		/* Identifying the instruction and retrieving the operands */
 		switch(idInstr(instr)){
 
 			case ADD:
@@ -116,7 +114,7 @@ int main(int argc, char* argv[]){
 					opcode_ok = 1;
 				}
 
-				/* Lecture des registres */
+				/* Retriveing registers */
 				addRegCode(input_file, bin_trame, 16);
 				addRegCode(input_file, bin_trame, 6);
 				addRegCode(input_file, bin_trame, 11);
@@ -175,11 +173,11 @@ int main(int argc, char* argv[]){
 				}
 
 
-				/* Lecture des registres */
+				/* Retrieving registers */
 				addRegCode(input_file, bin_trame, 6);
 				addRegCode(input_file, bin_trame, 11);
 
-				/* Lecture de la valeur imm */
+				/* Retrieving imm value */
 				addImmValueCode(input_file, bin_trame, 16);
 
 				afficherTrame(bin_trame);

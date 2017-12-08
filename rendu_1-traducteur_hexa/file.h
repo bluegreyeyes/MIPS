@@ -1,3 +1,5 @@
+/* Ce module regroupe des fonctions d'intéractions avec les fichiers */
+
 #ifndef __FILE_H__
 #define __FILE_H__
 
@@ -5,11 +7,9 @@
 void writeInFile(FILE* file, char data[]);
 
 /* Récupère un numéro de registre */
-/* FAIT + VERIF */ 
 int readRegister(FILE* file);
 
 /* Récupère une valeur immédiate ou un offset */
-/* FAIT + VERIF */
 int readImmValue(FILE* file);
 
 /* Récupère une adresse */
@@ -22,7 +22,6 @@ FILE* openFile(char* filename, char* mode);
 void closeFile(char* filename, FILE* file);
 
 /* Récupère l'op_code en tête d'instruction */
-/* FAIT + VERIF */
 void readInstr(FILE* file, char* instr);
 
 /* Passe à la ligne suivante */
