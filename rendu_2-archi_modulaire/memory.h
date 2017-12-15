@@ -14,3 +14,5 @@
  int readMemory (int address);
 
  void writeMemoy (int address, int value);
+
+ void printStack();
