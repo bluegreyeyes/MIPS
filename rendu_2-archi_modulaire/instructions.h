@@ -13,6 +13,8 @@
  * =================================================
  */
 
+/* Identifie une instruction d'après son opcode */
 instr idInstr (int bin_trame[]);
 
+/* Remplie la structure operand avec les opérandes identifiés lors du décodage de l'instruction */
 void readOperandes (int bin_trame[], operand * operands);

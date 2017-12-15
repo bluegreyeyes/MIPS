@@ -13,8 +13,11 @@
  * =================================================
  */
 
+/* Réalise l'addition de deux valeurs contenues dans des registres et place le résultat dans un troisième registre */
 void add(operands operands);
 
+/* Réalise la soustraction de deux valeurs contenues dans des registres et place le résultat dans un troisième registre */
 void sub(operands operands);
 
+/* Réalise un saut à l'adresse spécifée */
 void jump(operands operands);
