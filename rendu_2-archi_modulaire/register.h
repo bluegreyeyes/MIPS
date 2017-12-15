@@ -1,12 +1,12 @@
 /*==================================================
  *
- * Projet MIPS - Instructions to Hexadecimal Translator
+ *                - Projet MIPS -
  *
  * Contributors :
  * 	- LE POURSOT Axelle
  * 	- DESUERT Arthur
  *
- * Module Registers: manage all discussion with registers.
+ * Module Registers: manage all discussions with registers.
  *    in particular the display of register's state.
  *
  * =================================================

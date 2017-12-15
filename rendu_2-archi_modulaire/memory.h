@@ -1,12 +1,12 @@
 /*==================================================
  *
- * Projet MIPS - Instructions to Hexadecimal Translator
+ *                 - Projet MIPS -
  *
  * Contributors :
  * 	- LE POURSOT Axelle
  * 	- DESUERT Arthur
  *
- * Module Memory : manage all discussion with memory.
+ * Memory Module : manage all discussions with memory.
  *
  * =================================================
  */
