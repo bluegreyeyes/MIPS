@@ -34,10 +34,16 @@ typedef struct {
 #define NB_REGISTERS 32
 
 /* MIPS' .text memory length */
-#define TEXT_MEMORY_LEN
+#define TEXT_MEMORY_LEN 500
+
+/* MIPS' .text memory starting address */
+#define TEXT_MEMORY_START_ADDR 0x08040000
 
 /* MIPS' stack length */
-#define STACK_MEMORY_LEN
+#define STACK_MEMORY_LEN 500
+
+/* MIPS' stack starting address */
+#define STACK_MEMORY_START_ADDR 0xBFFFFFFF
 
 /*MIPS' Program counter */
 #define PROGRAM_COUNTER
