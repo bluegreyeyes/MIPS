@@ -32,7 +32,16 @@ void beq(Operands operands);
 void bgtz(Operands operands);
 
 
+void blez(Operands operands);
+
+
+void bne(Operands operands);
+
+/* Réalise un saut à l'adresse spécifée */
 void jump(Operands operands);
+
+
+void nop(Operands operands);
 
 
 void or_instr(Operands operands);
@@ -41,7 +50,7 @@ void or_instr(Operands operands);
 /* Réalise la soustraction de deux valeurs contenues dans des registres et place le résultat dans un troisième registre */
 void sub(Operands operands);
 
-/* Réalise un saut à l'adresse spécifée */
-void jump(Operands operands);
+
+void xor(Operands operands);
 
 #endif

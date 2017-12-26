@@ -39,4 +39,7 @@ typedef struct {
 /* MIPS' stack length */
 #define STACK_MEMORY_LEN
 
+/*MIPS' Program counter */
+#define PROGRAM_COUNTER
+
 #endif
