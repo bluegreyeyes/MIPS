@@ -36,15 +36,41 @@ void closeFile(char* filename, FILE* file){
 
 
 
-void loadInstructionsInMemory (FILE* instructions_file){
+void loadInstructionsInMemory (char* filename){
 
 	/* Variables */
 
+	FILE* instrFile = NULL;
+	char instruction[INSTR_LEN];
+	int offset = 0;
+
+	/* Code */
+
+	instrFile = openFile(filename, "r");
+
+	do
+	{
+		/* Retrieving an hexadecimal instruction */
+		readInstructionFromFile(instrFile, instruction);
+
+		/* Checking if we haven't reach the end of the file */
+		if(instruction[0] == '\0')
+			break;
+
+		/* Tranlate the instruction in decimal and write it in the memory */
+		writeMemory(TEXT_MEMORY_START_ADDR + offset, strHexaToDec(instruction));
+
+		/* Moving to the next free space */
+		offset++;
+
+	}while(1);
+
+	closeFile(filename, instrFile);
 }
 
 
 
-void readInstructionsFromFile (FILE * instruction_file, char instruction[]){
+void readInstructionFromFile (FILE * instruction_file, char instruction[]){
 
 	/* Variables */
 

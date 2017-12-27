@@ -23,10 +23,10 @@ FILE* openFile(char* filename, char* mode);
 void closeFile(char* filename, FILE* file);
 
 /*Charge les intructions contenues dans instructions_file dans la mémoire*/
-void loadInstructionsInMemory (FILE * Instructions_file);
+void loadInstructionsInMemory (char* filename);
 
-/*Charge les intructions contenues dans la mémoire vers le fichier instructions_file*/
-void readInstructionsFromFile (FILE * instruction_file, char instruction[]);
+/* Lit une instruction depuis le fichier instruction_file et la place dans la chaîne instruction */
+void readInstructionFromFile (FILE * instruction_file, char instruction[]);
 
 /* Tansforme une chaîne de carac. représentant un nombre hexa en nombre décimal */
 int strHexaToDec(char hexa_number[]);
