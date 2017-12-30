@@ -58,7 +58,7 @@ void loadInstructionsInMemory (char* filename){
 			break;
 
 		/* Tranlate the instruction in decimal and write it in the memory */
-		writeMemory(TEXT_MEMORY_START_ADDR + offset, strHexaToDec(instruction));
+		writeTextMemory(offset, strHexaToDec(instruction));
 
 		/* Moving to the next free space */
 		offset++;
@@ -85,10 +85,10 @@ void readInstructionFromFile (FILE * instruction_file, char instruction[]){
 		instruction[i] = c;
 		i++;
 
-	}while(!feof(instruction_file) && c != '\n');
+	}while(i < INSTR_LEN && !feof(instruction_file) && c != '\n');
 
 	/* Adding a null terminator at the end of the string */
-	instruction[i-1] = '\0';
+	instruction[INSTR_LEN-1] = '\0';
 
 	/* Putting a null terminator in first position if the end of the file is detected */
 	if(feof(instruction_file))

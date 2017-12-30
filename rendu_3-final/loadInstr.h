@@ -16,19 +16,96 @@
 #ifndef __LOADINSTR_H__
 #define __LOADINSTR_H__
 
-/* Ouvre un fichier avec le mode choisi */
+/*==================================================
+ *
+ * 			Function openFile
+ *
+ * 	Goal:
+ * 	Open the selected file in the given mode and
+ * 	return it.
+ *
+ * 	Interface :
+ * 	- filename : String containing the relative
+ * 	or absolute path to the file to open.
+ * 	- mode : The mode in which the file shall be
+ * 	open.
+ *
+ *==================================================
+ */
 FILE* openFile(char* filename, char* mode);
 
-/* Ferme le fichier fourni */
+/*==================================================
+ *
+ * 			Function closeFile
+ *
+ * 	Goal:
+ * 	Properly closing the given file.
+ *
+ * 	Interface :
+ * 	- filename : The name of the file to close
+ * 	(for debug purpose).
+ * 	- file : The FILE pointer to close.
+ *
+ *==================================================
+ */
 void closeFile(char* filename, FILE* file);
 
-/*Charge les intructions contenues dans instructions_file dans la mémoire*/
-void loadInstructionsInMemory (char* filename);
+/*==================================================
+ *
+ * 			Function strHexaToDec
+ *
+ * 	Goal:
+ * 	Converting an string representing a hexadecimal
+ * 	number into a base 10 integer.
+ *	The string shall contains only the hexadecimal
+ *	number. The "0x" indicator is not supported.
+ *
+ * 	Interface :
+ * 	- hexa_number : The string to convert into
+ * 	an integer
+ *
+ *==================================================
+ */
+int strHexaToDec(char hexa_number[]);
 
-/* Lit une instruction depuis le fichier instruction_file et la place dans la chaîne instruction */
+/*==================================================
+ *
+ * 			Function readInstructionFromFile
+ *
+ * 	Goal:
+ * 	Reads a single line in the formated file given
+ * 	and places it in the instruction string.
+ * 	It is supposed that the instructions recovered
+ * 	are maximum 8 characters long.  
+ * 	Will return a '\0' in the instruction's first
+ * 	character if an EOF is detected.
+ *
+ * 	Interface :
+ * 	- instruction_file : The file from which the
+ * 	instructions are red.
+ * 	- instruction : The string which contains the
+ * 	recovered instruction at the end of the function.
+ *
+ *==================================================
+ */
 void readInstructionFromFile (FILE * instruction_file, char instruction[]);
 
-/* Tansforme une chaîne de carac. représentant un nombre hexa en nombre décimal */
-int strHexaToDec(char hexa_number[]);
+/*==================================================
+ *
+ * 			Function loadInstructionsInMemory
+ *
+ * 	Goal:
+ * 	Reads a formated instruction file and puts
+ * 	its content in the text memory of the processor.
+ *
+ * 	Interface :
+ * 	- filename : A string containing the absolute
+ * 	or relative path to the file to read.
+ *
+ *==================================================
+ */
+void loadInstructionsInMemory (char* filename);
+
+
 
 #endif
