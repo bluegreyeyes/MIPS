@@ -21,9 +21,11 @@ typedef struct {
 
 	int rd;		/* Destination register */
 	int rs;		/* First source register */
-	int rt;		/* Second sosurce or destination register (depends on the instruction) */
+	int rt;		/* Second source or destination register (depends on the instruction) */
+	int sa;		/* Offset value for bit-moving instructions */
+	int base;	/* Register containing the base address (used by LW and SW instructions) */
 	int immediate;	/* Immediate value */
-	int offset;	/* Offset valeur */
+	int offset;	/* Offset value */
 	int target;	/* Jump value (for J and JAL instructions) */
 
 } Operands;
@@ -47,5 +49,8 @@ typedef struct {
 
 /*MIPS' Program counter */
 #define PROGRAM_COUNTER
+
+/* Instruction's lenght */
+#define INSTR_LEN 9
 
 #endif
