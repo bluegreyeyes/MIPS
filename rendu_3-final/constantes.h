@@ -56,4 +56,10 @@ typedef struct {
 /* Instruction's lenght */
 #define INSTR_LEN 9
 
+/* Opcode mask for MSB */
+#define OPCODE_MSB 0xFC000000
+
+/* Opcode mask for LSB */
+#define OPCODE_LSB 0x0000003F
+
 #endif

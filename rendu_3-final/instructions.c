@@ -1,15 +1,132 @@
 
 #include "constantes.h"
 #include "instructions.h"
+#include "register.h"
+#include "memory.h"
 
 
+void loadCurrentInstruction(){
 
-instr idInstr (int bin_trame[]){
+	/* Calculating the data's offset from start address, in 32 bits words */
+	int offset = (PROGRAM_COUNTER - TEXT_MEMORY_START_ADDR)/4;
 
+	writeRegister(INSTR_REGISTER, readTextMemory(offset));
 }
 
 
 
-void readOperandes (int bin_trame[], operand * operands){
+instr idInstr(){
+
+	/* Variables */
+
+	int instruction = readRegister(INSTR_REGISTER),
+	    opcode = 0;
+
+	/* Code */
+
+	/* Checking for the NOP instruction */
+	if(instruction == 0)
+		return NOP;
+
+	/* Determining the position of the opcode (in first or last position) */
+	if(instruction & OPCODE_MSB == 0){
+
+		/* Opcode is on the 6 LSB */
+		opcode = instruction & OPCODE_LSB;
+
+		switch(opcode){
+
+			case 0b100000:
+				return ADD;
+			
+			case 0b100100:
+				return AND;
+		
+			case 0b011010:
+				return DIV;
+
+			case 0b001000:
+				return JR;
+
+			case 0b010000:
+				return MFHI;
+
+			case 0b010010:
+				return MFLO;
+
+			case 0b011000:
+				return MULT;
+
+			case 0b100101:
+				return OR;
+
+			case 0b000010:
+				return ROTR;
+
+			case 0b000010:
+				return SRL;
+
+			case 0b101010:
+				return SLT;
+
+			case 0b100010:
+				return SUB;
+
+			case 0b100110:
+				return XOR;
+
+			case 0b001100:
+				return SYSCALL;
+
+		}
+	}
+	else{
+
+		/* Opcode is on the 6 MSB */
+		opcode = instruction & OPCODE_MSB;
+		opcode >> 26;
+
+		switch(opcode){
+
+			case 0b001000:
+				return ADDI;
+
+			case 0b000100:
+				return BEQ;
+
+			case 0b000111:
+				return BGTZ;
+
+			case 0b000110:
+				return BLEZ;
+
+			case 0b000101:
+				return BNE;
+
+			case 0b000010:
+				return J;
+
+			case 0b000011:
+				return JAL;
+
+			case 0b001111:
+				return LUI;
+
+			case 0b100011:
+				return LW;
+
+			case 0b101011:
+				return SW;
+
+			case 0b000000:
+				return SLL;
+
+		}
+	}
+}
+
+
+
+void readOperandes (operand *operands){
 
 }

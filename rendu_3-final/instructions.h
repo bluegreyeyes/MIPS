@@ -20,9 +20,9 @@
 void loadCurrentInstruction();
 
 /* Identifie une instruction d'après son opcode */
-instr idInstr (int bin_trame[]);
+instr idInstr();
 
 /* Remplie la structure operand avec les opérandes identifiés lors du décodage de l'instruction */
-void readOperands (int bin_trame[], operand * operands);
+void readOperands(operand *operands);
 
 #endif
