@@ -50,6 +50,9 @@ typedef struct {
 /*MIPS' Program counter */
 #define PROGRAM_COUNTER
 
+/* MIPS' Instruction Register */
+#define INSTR_REGISTER 
+
 /* Instruction's lenght */
 #define INSTR_LEN 9
 
