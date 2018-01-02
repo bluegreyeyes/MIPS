@@ -129,4 +129,19 @@ instr idInstr(){
 
 void readOperandes (operand *operands){
 
+	/* Recovering the current instruction */
+
+	int instruction = readRegister(INSTR_REGISTER);
+
+	/* Filling the Operand structure */
+
+	operands->rd = (instruction & 0x0000F800) >> 11;
+	operands->rs = (instruction & 0x001F0000) >> 16;
+	operands->rt = (instruction & 0x03D00000) >> 21;
+	operands->sa = (instruction & 0x000007C0) >> 6;
+	operands->base = (instruction & 0x03D00000) >> 21;
+	operands->immediate = (instruction & 0x0000FFFF);
+	operands->offset = (instruction & 0x0000FFFF);
+	operands->target = (instruction & 0x03FFFFFF);
+
 }
