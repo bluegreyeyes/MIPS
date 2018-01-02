@@ -8,7 +8,7 @@
 void loadCurrentInstruction(){
 
 	/* Calculating the data's offset from start address, in 32 bits words */
-	int offset = (PROGRAM_COUNTER - TEXT_MEMORY_START_ADDR)/4;
+	int offset = (readRegister(PROGRAM_COUNTER) - TEXT_MEMORY_START_ADDR)/4;
 
 	writeRegister(INSTR_REGISTER, readTextMemory(offset));
 }
@@ -61,10 +61,12 @@ instr idInstr(){
 				return OR;
 
 			case 0b000010:
-				return ROTR;
-
-			case 0b000010:
-				return SRL;
+				if(instruction & 0x00200000){
+					return ROTR;
+				}
+				else{
+					return SRL;
+				}
 
 			case 0b101010:
 				return SLT;
@@ -84,7 +86,7 @@ instr idInstr(){
 
 		/* Opcode is on the 6 MSB */
 		opcode = instruction & OPCODE_MSB;
-		opcode >> 26;
+		opcode = opcode >> 26;
 
 		switch(opcode){
 
@@ -127,7 +129,7 @@ instr idInstr(){
 
 
 
-void readOperandes (operand *operands){
+void readOperands (Operands *operands){
 
 	/* Recovering the current instruction */
 
@@ -136,8 +138,8 @@ void readOperandes (operand *operands){
 	/* Filling the Operand structure */
 
 	operands->rd = (instruction & 0x0000F800) >> 11;
-	operands->rs = (instruction & 0x001F0000) >> 16;
-	operands->rt = (instruction & 0x03D00000) >> 21;
+	operands->rt = (instruction & 0x001F0000) >> 16;
+	operands->rs = (instruction & 0x03E00000) >> 21;
 	operands->sa = (instruction & 0x000007C0) >> 6;
 	operands->base = (instruction & 0x03D00000) >> 21;
 	operands->immediate = (instruction & 0x0000FFFF);

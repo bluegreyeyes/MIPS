@@ -23,6 +23,6 @@ void loadCurrentInstruction();
 instr idInstr();
 
 /* Remplie la structure operand avec les opérandes identifiés lors du décodage de l'instruction */
-void readOperands(operand *operands);
+void readOperands(Operands *operands);
 
 #endif
