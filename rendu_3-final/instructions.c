@@ -29,7 +29,7 @@ instr idInstr(){
 		return NOP;
 
 	/* Determining the position of the opcode (in first or last position) */
-	if(instruction & OPCODE_MSB == 0){
+	if((instruction & OPCODE_MSB) == 0){
 
 		/* Opcode is on the 6 LSB */
 		opcode = instruction & OPCODE_LSB;
@@ -88,7 +88,8 @@ instr idInstr(){
 		opcode = instruction & OPCODE_MSB;
 		opcode = opcode >> 26;
 
-		switch(opcode){
+		/* We need to apply the LSB mask because the bit translation copies the MSB of the opcode (which can be a '1' */
+		switch(opcode & OPCODE_LSB){
 
 			case 0b001000:
 				return ADDI;
@@ -146,4 +147,11 @@ void readOperands (Operands *operands){
 	operands->offset = (instruction & 0x0000FFFF);
 	operands->target = (instruction & 0x03FFFFFF);
 
+}
+
+
+
+void updateProgramCounter(){
+
+	writeRegister(PROGRAM_COUNTER, readRegister(PROGRAM_COUNTER) + 4);
 }

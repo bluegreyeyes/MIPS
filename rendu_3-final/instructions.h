@@ -16,13 +16,57 @@
 #ifndef __INSTRUCTIONS_H__
 #define __INSTRUCTIONS_H__
 
-/* Charge dans le registre d'instruction l'instruction pointée par le Program Counter */
+/*==================================================
+ *
+ * 			Fonction loadCurrentInstruction
+ *
+ * 	Goal:
+ * 	Load in the Instruction Register the instruction
+ * 	pointed by the Program Counter.
+ *
+ *==================================================
+ */
 void loadCurrentInstruction();
 
-/* Identifie une instruction d'après son opcode */
+/*==================================================
+ *
+ * 			Fonction idInstr
+ *
+ * 	Goal:
+ * 	Returns the opcode, using the instr enumeration,
+ * 	of the instruction loaded in the Instruction
+ * 	Register.
+ *
+ *==================================================
+ */
 instr idInstr();
 
-/* Remplie la structure operand avec les opérandes identifiés lors du décodage de l'instruction */
+/*==================================================
+ *
+ * 			Fonction readOperands
+ *
+ * 	Goal:
+ * 	Fills the provided Operands structure with
+ * 	the operands found in the instruction loaded
+ * 	in the Instruction Register.
+ *
+ * 	Interface :
+ * 	- operands : A pointer to the Operands struct.
+ * 	to be filled.
+ *
+ *==================================================
+ */
 void readOperands(Operands *operands);
+
+/*==================================================
+ *
+ * 			Fonction updateProgramCounter
+ *
+ * 	Goal:
+ * 	Adds 4 to the content of the Program Counter
+ *
+ *==================================================
+ */
+void updateProgramCounter();
 
 #endif
