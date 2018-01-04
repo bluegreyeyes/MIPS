@@ -30,6 +30,10 @@ typedef struct {
 
 } Operands;
 
+/* Enumeration containing all the instructions supported, for visibility purpose */
+typedef enum instr {ADD, ADDI, AND, BEQ, BGTZ, BLEZ, BNE, DIV, J, JAL, JR, LUI, LW, MFHI, MFLO, MULT, NOP, OR, ROTR, SLL, SLT, SRL, SUB, SW, SYSCALL, XOR} instr;
+
+
 /* Constants */
 
 /* MIPS' registers number */
@@ -50,7 +54,16 @@ typedef struct {
 /*MIPS' Program counter */
 #define PROGRAM_COUNTER
 
+/* MIPS' Instruction Register */
+#define INSTR_REGISTER 
+
 /* Instruction's lenght */
 #define INSTR_LEN 9
+
+/* Opcode mask for MSB */
+#define OPCODE_MSB 0xFC000000
+
+/* Opcode mask for LSB */
+#define OPCODE_LSB 0x0000003F
 
 #endif
