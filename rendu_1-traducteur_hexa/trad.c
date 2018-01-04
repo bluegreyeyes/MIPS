@@ -162,7 +162,7 @@ void decToBinTrame(int number, int trame[], int trame_len){
 	temp = (int *) malloc(trame_len * sizeof(int));
 
 	/* Cleaning the memory before using it */
-	for(i = 0 ; i < trame_len - 1 ; i++)
+	for(i = 0 ; i < trame_len ; i++)
 		temp[i] = 0;
 
 	if(number < 0){
@@ -178,15 +178,16 @@ void decToBinTrame(int number, int trame[], int trame_len){
 		i++;
 	}
 
+	/* Inverting the bit trame to have it in the good order */
 	for(i = trame_len - 1 ; i > -1 ; i--){
 
 		trame[trame_len - 1 - i] = temp[i];
 	}
 
+	/* If the original number was negative, uses the binary two's complement to code it */
 	if(negative){
 
-		printf("Negatif !\n");
-
+		/* First, taking the complement of the trame */
 		for(i = 0 ; i < trame_len ; i++){
 			if(trame[i] == 0){
 				trame[i] += 1;
@@ -196,10 +197,19 @@ void decToBinTrame(int number, int trame[], int trame_len){
 			}
 		}
 
+		/* Then, add one to the trame */
 		i = trame_len - 1;
-		while(trame[i]){ i--; }
+		do
+		{
+			trame[i] += 1;
+			if(trame[i] == 2){
+				trame[i] = 0;
+			}
 
-		trame[i] = 1;
+			i--;
+
+		}while(trame[i+1] != 1 && i>0);
+
 	}
 
 	free(temp);

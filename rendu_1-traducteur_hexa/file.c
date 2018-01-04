@@ -128,7 +128,6 @@ int readImmValue(FILE* file){
 		/* If a minus is detected, save the information in the negative flag */
 		if(c == '-'){
 
-			printf("Détection du -\n");
 			negative = 1;
 		}
 
@@ -163,7 +162,6 @@ int readImmValue(FILE* file){
 	}
 	else if(negative){
 
-		printf("Retour d'une val. < 0.\n");
 		return(-1 * strToDec(value));
 	}
 	else{

@@ -158,6 +158,14 @@ int main(int argc, char* argv[]){
 					opcode_ok = 1;
 				}
 
+				/* Retrieving registers */
+				addRegCode(input_file, bin_trame, 11);
+				addRegCode(input_file, bin_trame, 6);
+
+				/* Retrieving imm value */
+				addImmValueCode(input_file, bin_trame, 16);
+				break;
+
 			case BEQ:
 
 				if(!opcode_ok){
@@ -179,8 +187,6 @@ int main(int argc, char* argv[]){
 
 				/* Retrieving imm value */
 				addImmValueCode(input_file, bin_trame, 16);
-
-				afficherTrame(bin_trame);
 
 				break;
 
