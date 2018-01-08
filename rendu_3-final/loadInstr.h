@@ -107,5 +107,7 @@ void readInstructionFromFile (FILE * instruction_file, char instruction[]);
 void loadInstructionsInMemory (char* filename);
 
 
+/* Traduction du fichier fourni en hexa */
+char* translateInstructionFileToHexa(char *filename);
 
 #endif

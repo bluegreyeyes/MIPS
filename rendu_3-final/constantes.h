@@ -34,6 +34,7 @@ typedef struct {
 typedef enum instr {ADD, ADDI, AND, BEQ, BGTZ, BLEZ, BNE, DIV, J, JAL, JR, LUI, LW, MFHI, MFLO, MULT, NOP, OR, ROTR, SLL, SLT, SRL, SUB, SW, SYSCALL, XOR} instr;
 
 
+
 /* Constants */
 
 /* MIPS' registers number */
@@ -57,6 +58,8 @@ typedef enum instr {ADD, ADDI, AND, BEQ, BGTZ, BLEZ, BNE, DIV, J, JAL, JR, LUI, 
 /* MIPS' Instruction Register */
 #define INSTR_REGISTER 
 
+
+
 /* Instruction's lenght */
 #define INSTR_LEN 9
 
@@ -65,5 +68,33 @@ typedef enum instr {ADD, ADDI, AND, BEQ, BGTZ, BLEZ, BNE, DIV, J, JAL, JR, LUI, 
 
 /* Opcode mask for LSB */
 #define OPCODE_LSB 0x0000003F
+
+
+
+/* Constants from the translator */
+
+/* Taille d'un champ adresse */
+#define TRAME_ADDRESS_LEN 26
+
+/* Taille d'une trame d'instruction binaire */
+#define TRAME_BIN_LEN 32
+
+/* Taille max d'une instruction assembleur MIPS */
+#define INSTR_MAX_LEN 8
+
+/* Taille d'une trame d'instruction hexadécimale */
+#define TRAME_HEXA_LEN 9
+
+/* Taille de l'opcode en binaire */
+#define TRAME_OPCODE_LEN 6
+
+/* Taille d'un champ de registre */
+#define TRAME_REG_LEN 5
+
+/* Taille du champ valeur immédiate */
+#define TRAME_IMM_LEN 16
+
+/* Taille du nom du fichier entrant */
+#define FILENAME_LEN 20
 
 #endif

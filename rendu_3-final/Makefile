@@ -10,7 +10,7 @@ OBJECTS = *.o
 #Arguments à passer au compilateur
 CFLAGS =
 
-all: main.o alu.o loadInstr.o instructions.o memory.o register.o
+all: main.o alu.o loadInstr.o instructions.o memory.o register.o file.o trad.o
 	$(CC) $(OBJECTS) -o $(BIN)
 
 main.o: main.c *.h
@@ -30,3 +30,9 @@ register.o: register.c *.h
 
 memory.o: memory.c *.h
 	$(CC) -c -g memory.c
+
+trad.o: trad.c *.h
+	$(CC) -c -g trad.c
+
+file.o: file.c *h
+	$(CC) -c -g file.c
