@@ -38,7 +38,7 @@ typedef enum instr {ADD, ADDI, AND, BEQ, BGTZ, BLEZ, BNE, DIV, J, JAL, JR, LUI, 
 /* Constants */
 
 /* MIPS' registers number */
-#define NB_REGISTERS 32
+#define NB_REGISTERS 35
 
 /* MIPS' .text memory length */
 #define TEXT_MEMORY_LEN 500
@@ -53,7 +53,7 @@ typedef enum instr {ADD, ADDI, AND, BEQ, BGTZ, BLEZ, BNE, DIV, J, JAL, JR, LUI, 
 #define STACK_MEMORY_START_ADDR 0xBFFFFFFF
 
 /*MIPS' Program counter */
-#define PROGRAM_COUNTER 
+#define PROGRAM_COUNTER
 
 /* MIPS' Instruction Register */
 #define INSTR_REGISTER
