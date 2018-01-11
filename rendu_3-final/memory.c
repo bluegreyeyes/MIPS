@@ -10,7 +10,7 @@ int readMemory (int address){
 
 
 
-void writeMemoy (int address, int value){
+void writeMemory (int address, int value){
 
 }
 
@@ -19,4 +19,3 @@ void writeMemoy (int address, int value){
 void printStack(){
 
 }
-

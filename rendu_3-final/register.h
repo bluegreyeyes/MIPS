@@ -16,7 +16,7 @@
 #define __REGISTERS_H__
 
 /* lecture des données contenues dans le registre */
-int readRegister (in reg_number);
+int readRegister (int reg_number);
 
 /*Ecriture de données dans un registre */
 void writeRegister (int reg_number, int value);
