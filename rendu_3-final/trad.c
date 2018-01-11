@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "constantes.h"
 #include "trad.h"
 #include "file.h"
 

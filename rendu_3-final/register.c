@@ -2,9 +2,12 @@
 #include "constantes.h"
 #include "register.h"
 
+/* Declairing global array representing the registers */
+extern int registers[NB_REGISTERS];
 
 
-int readRegister (int reg_number){
+
+int readMIPSRegister (int reg_number){
   return (registers[reg_number]);
 }
 
@@ -21,10 +24,11 @@ void writeRegister (int reg_number, int value){
 }
 
 
+void initializingRegisters(){
 
-void printRegister (){
-  int index ;
-  for (index = 0; index <=NB_REGISTERS; index++){
-    printf("Registre n°%d = %d\n",index,registres[index]);
-  }
+	/* Putting 0 in $0 */
+	registers[0] = 0;
+
+	/* Setting the Program Counter to the text memory start address */
+	registers[PROGRAM_COUNTER] = TEXT_MEMORY_START_ADDR;
 }

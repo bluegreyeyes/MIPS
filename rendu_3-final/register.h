@@ -16,12 +16,15 @@
 #define __REGISTERS_H__
 
 /* lecture des données contenues dans le registre */
-int readRegister (int reg_number);
+int readMIPSRegister (int reg_number);
 
 /*Ecriture de données dans un registre */
 void writeRegister (int reg_number, int value);
 
 /*Affiche la valeur de tous les registres */
 void printRegister ();
+
+/* Initialise certains registres */
+void initializingRegisters();
 
 #endif

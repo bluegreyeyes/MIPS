@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <constantes.h>
-#include <UI.h>
+#include "constantes.h"
+#include "register.h"
+#include "memory.h"
+#include "UI.h"
 
 
 int checkStepMode(char arg[]){
@@ -29,7 +31,7 @@ void waitUserGo(){
 void displayProgram(){
 
 	int i = 0,
-	    start_addr = readRegister(PROGRAM_COUNTER),
+	    start_addr = readMIPSRegister(PROGRAM_COUNTER),
 	    instr = readTextMemory(0);
 
 	while(instr != 0){
@@ -40,4 +42,13 @@ void displayProgram(){
 		instr = readTextMemory(i);
 	}
 
+}
+
+
+
+void printRegister(){
+  int index ;
+  for (index = 0; index < NB_REGISTERS; index++){
+    printf("Registre n°%d = %d\n",index,readMIPSRegister(index));
+  }
 }

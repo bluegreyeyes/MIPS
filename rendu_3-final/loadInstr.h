@@ -32,7 +32,7 @@
  *
  *==================================================
  */
-FILE* openFile(char* filename, char* mode);
+//FILE* openFile(char* filename, char* mode);
 
 /*==================================================
  *
@@ -48,7 +48,7 @@ FILE* openFile(char* filename, char* mode);
  *
  *==================================================
  */
-void closeFile(char* filename, FILE* file);
+//void closeFile(char* filename, FILE* file);
 
 /*==================================================
  *
@@ -66,7 +66,7 @@ void closeFile(char* filename, FILE* file);
  *
  *==================================================
  */
-int strHexaToDec(char hexa_number[]);
+//int strHexaToDec(char hexa_number[]);
 
 /*==================================================
  *
@@ -108,6 +108,6 @@ void loadInstructionsInMemory (char* filename);
 
 
 /* Traduction du fichier fourni en hexa */
-char* translateInstructionFileToHexa(char *filename);
+char *translateInstructionFileToHexa(char *filename);
 
 #endif

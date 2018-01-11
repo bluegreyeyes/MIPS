@@ -2,6 +2,9 @@
 #include "constantes.h"
 #include "memory.h"
 
+/* Declairing global arrays representing the memory */
+extern int text_mem[TEXT_MEMORY_LEN];
+extern int stack_mem[STACK_MEMORY_LEN];
 
 
 int readTextMemory (int address){

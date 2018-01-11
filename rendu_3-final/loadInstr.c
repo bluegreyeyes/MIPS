@@ -4,38 +4,11 @@
 
 
 #include "constantes.h"
+#include "memory.h"
+#include "register.h"
 #include "trad.h"
 #include "file.h"
 #include "loadInstr.h"
-
-
-
-FILE* openFile(char* filename, char* mode){
-
-	FILE * fdin = fopen(filename, mode);
-
-	if ( NULL == fdin )
-	{
-		fprintf(stderr, "Error opening file %s\n", filename);
-		perror("");
-		exit (EXIT_FAILURE);
-	}
-
-	return fdin;
-}
-
-
-
-void closeFile(char* filename, FILE* file){
-
-	if (fclose(file) == EOF)
-	{
-		fprintf(stderr, "Error closing file %s\n", filename);
-		perror("");
-		exit(EXIT_FAILURE);
-	}
-}
-
 
 
 void loadInstructionsInMemory (char* filename){
@@ -66,6 +39,9 @@ void loadInstructionsInMemory (char* filename){
 		offset++;
 
 	}while(1);
+
+	/* Writting a NOP instruction to ensure system stop */
+	writeTextMemory(offset, 0);
 
 	closeFile(filename, instrFile);
 }
@@ -99,41 +75,7 @@ void readInstructionFromFile (FILE * instruction_file, char instruction[]){
 
 
 
-int strHexaToDec(char hexa_number[]){
-
-	/* Variables */
-
-	int hexa_num = 0,
-	    pow = 1,
-	    len = 0,
-	    i;
-
-	/* Code */
-
-	while(hexa_number[len++] != '\0');
-
-	for(i = len-2 ; i > -1 ; i--){
-
-		/* If it's a digit, we compare it to the 0 ref. */
-		if(hexa_number[i] >= '0' && hexa_number[i] <= '9'){
-
-			hexa_num += (hexa_number[i] - '0') * pow;
-		}
-		/* If it's a letter, the ref. is 'a', we then add 1 and multiplie by 10 to obtain the correct value */
-		else{
-
-			hexa_num += (hexa_number[i] - 'a' + 10) * pow;
-		}
-
-		pow *= 16;
-	}
-
-	return(hexa_num);
-}
-
-
-
-char* translateInstructionFileToHexa(char *filename){
+char *translateInstructionFileToHexa(char *filename){
 	 
 	/* Variables */
 	int bin_trame[TRAME_BIN_LEN] = {0},
@@ -143,12 +85,13 @@ char* translateInstructionFileToHexa(char *filename){
 
 	char hexa_trame[TRAME_HEXA_LEN] = "",
 	     instr[INSTR_MAX_LEN] = "",
-	     hexa_file_name[FILENAME_LEN + 4];
+	     *hexa_file_name = NULL;
 
 	FILE *input_file = NULL,
 	     *hexa_file = NULL;
 
 	/* Creating name of the new hexa file */
+	hexa_file_name = (char *) malloc((FILENAME_LEN + 4) * sizeof(char));
 	createHexaFilename(filename, hexa_file_name);
 
 	/* Opening the needed files to proceed */

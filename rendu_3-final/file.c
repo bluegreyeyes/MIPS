@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include <string.h>
 
+#include "constantes.h"
 #include "file.h"
 #include "trad.h"
 

@@ -8,18 +8,18 @@
 void loadCurrentInstruction(){
 
 	/* Calculating the data's offset from start address, in 32 bits words */
-	int offset = (readRegister(PROGRAM_COUNTER) - TEXT_MEMORY_START_ADDR)/4;
+	int offset = (readMIPSRegister(PROGRAM_COUNTER) - TEXT_MEMORY_START_ADDR)/4;
 
 	writeRegister(INSTR_REGISTER, readTextMemory(offset));
 }
 
 
 
-instr idInstr(){
+instr idInstruction(){
 
 	/* Variables */
 
-	int instruction = readRegister(INSTR_REGISTER),
+	int instruction = readMIPSRegister(INSTR_REGISTER),
 	    opcode = 0;
 
 	/* Code */
@@ -134,7 +134,7 @@ void readOperands (Operands *operands){
 
 	/* Recovering the current instruction */
 
-	int instruction = readRegister(INSTR_REGISTER);
+	int instruction = readMIPSRegister(INSTR_REGISTER);
 
 	/* Filling the Operand structure */
 
@@ -153,5 +153,5 @@ void readOperands (Operands *operands){
 
 void updateProgramCounter(){
 
-	writeRegister(PROGRAM_COUNTER, readRegister(PROGRAM_COUNTER) + 4);
+	writeRegister(PROGRAM_COUNTER, readMIPSRegister(PROGRAM_COUNTER) + 4);
 }
