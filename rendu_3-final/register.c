@@ -4,14 +4,14 @@
 
 
 
-int readRegister (in reg_number){
-
+int readRegister (int reg_number){
+  return (registers[reg_number]);
 }
 
 
 
 void writeRegister (int reg_number, int value){
-
+  registers[reg_number] = value;
 }
 
 
@@ -19,4 +19,3 @@ void writeRegister (int reg_number, int value){
 void printRegister (){
 
 }
-

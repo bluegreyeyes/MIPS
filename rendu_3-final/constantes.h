@@ -53,10 +53,10 @@ typedef enum instr {ADD, ADDI, AND, BEQ, BGTZ, BLEZ, BNE, DIV, J, JAL, JR, LUI, 
 #define STACK_MEMORY_START_ADDR 0xBFFFFFFF
 
 /*MIPS' Program counter */
-#define PROGRAM_COUNTER
+#define PROGRAM_COUNTER 
 
 /* MIPS' Instruction Register */
-#define INSTR_REGISTER 
+#define INSTR_REGISTER
 
 
 
