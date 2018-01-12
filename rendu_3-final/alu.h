@@ -37,8 +37,20 @@ void blez(Operands operands);
 
 void bne(Operands operands);
 
+
+void div(Operands operands);
+
 /* Réalise un saut à l'adresse spécifée */
 void jump(Operands operands);
+
+
+void jal(Operands operands);
+
+
+void jr(Operand operands);
+
+
+void lui(Operand operands);
 
 
 void nop(Operands operands);
