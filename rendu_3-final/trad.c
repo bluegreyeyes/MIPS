@@ -222,13 +222,13 @@ instr idInstr(char *instr){
 
 	/* Variables */
 
-	char instructions[26][INSTR_MAX_LEN] = {"ADD", "ADDI", "AND", "BEQ", "BGTZ", "BLEZ", "BNE", "DIV", "J", "JAL", "JR", "LUI", "LW", "MFHI", "MFLO", "MULT", "NOP", "OR", "ROTR", "SLL", "SLT", "SRL", "SUB", "SW", "SYSCALL", "XOR"};
+	char instructions[27][INSTR_MAX_LEN] = {"ADD", "ADDI", "AND", "BEQ", "BGTZ", "BLEZ", "BNE", "DIV", "J", "JAL", "JR", "LUI", "LW", "MFHI", "MFLO", "MULT", "NOP", "OR", "ROTR", "SLL", "SLT", "SRL", "SUB", "SW", "SYSCALL", "XOR", "EXIT"};
 
 	int i;
 
 	/* Code */
 
-	for(i = 0 ; i < 26 ; i++){
+	for(i = 0 ; i < 27 ; i++){
 
 		if(!strcmp(instr, instructions[i])){
 			return(i);
