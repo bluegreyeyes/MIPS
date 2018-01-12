@@ -110,4 +110,8 @@ void loadInstructionsInMemory (char* filename);
 /* Traduction du fichier fourni en hexa */
 char *translateInstructionFileToHexa(char *filename);
 
+char *readSingleInstruction(FILE *input_stream);
+
+void cleanBuffer(FILE *file);
+
 #endif

@@ -52,3 +52,6 @@ void printRegister(){
     printf("Registre n°%d = %d\n",index,readMIPSRegister(index));
   }
 }
+
+
+

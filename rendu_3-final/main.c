@@ -28,6 +28,9 @@ int registers[NB_REGISTERS];
 int text_mem[TEXT_MEMORY_LEN];
 int stack_mem[STACK_MEMORY_LEN];
 
+/* Overflow count */
+int overflow_counter = 0;
+
 
 
 int main(int argc, char *argv[]){
@@ -45,6 +48,8 @@ int main(int argc, char *argv[]){
 	Operands operands;
 
 	/* Code */
+
+	initializingRegisters();
 
 	/* Checking if an argument was passed to the program */
 	if(argc > 1){
@@ -67,23 +72,29 @@ int main(int argc, char *argv[]){
 			step_mode = 1;
 		}
 
+		/* Displaying the program's code in hexadecimal */
+		printf("-----[ Program Code ]-----\n\n");
+		displayProgram();
+		printf("\n");
+
 	}
 	else{
 
 		interactive_mode = 1;
-		printf("interactive mode currently not available !\n");
-		exit(1);
+		//printf("interactive mode currently not available !\n");
+		printf("Lancement en mode intéractif.\n");
 	}
 
-	initializingRegisters();
 
 	do
 	{
 		if(interactive_mode){
 
 			/* Récupérer l'instr tapée */
+			printf("Saisissez votre instruction :\n");
 
 			/* La traduire en décimale */
+			typed_instr = strHexaToDec(readSingleInstruction(stdin));
 
 			/* La placer dans le registre d'instruction */
 			writeRegister(INSTR_REGISTER, typed_instr);
@@ -97,7 +108,10 @@ int main(int argc, char *argv[]){
 		/* Filling the Operands structure */
 		readOperands(&operands);
 
+		/* Reseting branch flag */
 		branch_instr = 0;
+
+		printf("Instruction en attente :\n");
 
 		switch(idInstruction()){
 
@@ -291,6 +305,7 @@ int main(int argc, char *argv[]){
 
 			printf("-----[ Registers' state ]-----\n");
 			printRegister();
+			printf("\n");
 
  		}
 
@@ -305,9 +320,12 @@ int main(int argc, char *argv[]){
 	/* Affichage de la mémoire et des registres à la fin de l'émulation */
 	printf("-----[ Final state of the registers ]-----\n");
 	printRegister();
+	printf("\n");
 
-	printf("-----[ Finale state of the data mem ]-----\n");
+	//printf("-----[ Finale state of the data mem ]-----\n");
 	/* TODO : Afficher mémoire data */
+
+	printf("-----[ End of the simulation ]-----\n");
 
 	return(0);
 }
