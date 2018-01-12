@@ -40,6 +40,9 @@ typedef enum instr {ADD, ADDI, AND, BEQ, BGTZ, BLEZ, BNE, DIV, J, JAL, JR, LUI, 
 /* MIPS' registers number */
 #define NB_REGISTERS 36
 
+/* MIPS' max value contain by a 32-bit's register*/
+#define REGISTER_MAX_VALUE 4294967295
+
 /* MIPS' .text memory length */
 #define TEXT_MEMORY_LEN 500
 
@@ -58,6 +61,11 @@ typedef enum instr {ADD, ADDI, AND, BEQ, BGTZ, BLEZ, BNE, DIV, J, JAL, JR, LUI, 
 /* MIPS' Instruction Register */
 #define INSTR_REGISTER 33
 
+/* MIPS' Register LO */
+#define LO 34
+
+/*MIPS' Register HI */
+#define HI 35
 
 
 /* Instruction's lenght */
