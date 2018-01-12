@@ -28,9 +28,3 @@ int readDataMemory (int address){
 void writeDataMemory (int address, int value){
   stack_mem[address] = value;
 }
-
-
-
-void printStack(){
-
-}

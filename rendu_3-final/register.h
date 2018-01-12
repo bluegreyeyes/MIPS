@@ -15,16 +15,49 @@
 #ifndef __REGISTERS_H__
 #define __REGISTERS_H__
 
-/* lecture des données contenues dans le registre */
+
+/*==================================================
+ *
+ * 			Function readMIPSRegister
+ *
+ * 	Goal:
+ * 	Reads data contains in register, in order to show the stats
+ *  and realize instructions.
+ *
+ *
+ *==================================================
+ */
 int readMIPSRegister (int reg_number);
 
-/*Ecriture de données dans un registre */
+
+/*==================================================
+ *
+ * 			Function writeRegister
+ *
+ * 	Goal:
+ * 	Write data in register result of an executed instruction.
+ *
+ *
+ *==================================================
+ */
+
 void writeRegister (int reg_number, int value);
 
-/*Affiche la valeur de tous les registres */
-void printRegister ();
 
-/* Initialise certains registres */
+/*==================================================
+ *
+ * 			Function initializingRegisters
+ *
+ * 	Goal:
+ * 	Initialize some specials registers :
+ *    - zero is a register always equal to 0
+ *    - Program Counter is a register contains the address of
+ *       the next instruction, so at the beginnnig, it has to contain
+ *       the address of the first instruction.
+ *
+ *
+ *==================================================
+ */
 void initializingRegisters();
 
 #endif

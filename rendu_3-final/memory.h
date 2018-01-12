@@ -14,19 +14,58 @@
 #ifndef __MEMORY_H__
 #define __MEMORY_H__
 
-/* lecture des données contenues dans la mémoire concernant la partie contenant le programme */
+
+/*==================================================
+ *
+ * 			Function readTextMemory
+ *
+ * 	Goal:
+ * 	Reads program's datas contain in the memory.
+ *
+ *
+ *==================================================
+ */
+
 int readTextMemory (int address);
 
-/* Ecriture du programme dans la mémoire */
+
+/*==================================================
+ *
+ * 			Function writeTextMemory
+ *
+ * 	Goal:
+ * 	Write program's datas in the memory.
+ *
+ *
+ *==================================================
+ */
+
 void writeTextMemory (int address, int value);
 
-/* lecture des données contenues dans la mémoire */
+
+/*==================================================
+ *
+ * 			Function readDataMemory
+ *
+ * 	Goal:
+ * 	Reads datas (not program's data) contain in the memory.
+ *
+ *
+ *==================================================
+ */
 int readDataMemory (int address);
 
-/* Ecriture des données dans la mémoire */
-void writeDataMemory (int address, int value);
 
-/*Affiche la valeur de la pile */
-void printStack();
+/*==================================================
+ *
+ * 			Function writeDataMemory
+ *
+ * 	Goal:
+ * 	Write datas in the memory.
+ *
+ *
+ *==================================================
+ */
+void writeDataMemory (int address, int value);
 
 #endif
