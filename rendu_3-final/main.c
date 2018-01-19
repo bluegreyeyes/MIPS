@@ -39,7 +39,8 @@ int main(int argc, char *argv[]){
 	int interactive_mode,		/* Flag watching the interactive status of the emulator */
 	    step_mode = 0,		/* Step mode flag */
 	    branch_instr,		/* Branch or jump instruction flag */
-	    typed_instr;
+	    typed_instr,
+	    instr_count = 1;
 
 	char *hex_file = NULL;
 
@@ -74,24 +75,24 @@ int main(int argc, char *argv[]){
 
 		/* Displaying the program's code in hexadecimal */
 		printf("-----[ Program Code ]-----\n\n");
-		displayProgram();
+		displayProgram(0);
 		printf("\n");
 
 	}
 	else{
 
 		interactive_mode = 1;
-		//printf("interactive mode currently not available !\n");
-		printf("Lancement en mode intéractif.\n");
+		printf("The MIPS Emulator is launched in interactive mode.\n");
 	}
 
+	printf("-----[ Beginning of the simulation ]-----\n\n");
 
 	do
 	{
 		if(interactive_mode){
 
 			/* Récupérer l'instr tapée */
-			printf("Saisissez votre instruction :\n");
+			printf("Please type your instruction : \n");
 
 			/* La traduire en décimale */
 			typed_instr = strHexaToDec(readSingleInstruction(stdin));
@@ -103,6 +104,10 @@ int main(int argc, char *argv[]){
 		else{
 
 			loadCurrentInstruction();
+
+			printf("--[ Step  %-d ]--\n", instr_count);
+			displayProgram(1);
+			printf("\n");
 		}
 
 		/* Filling the Operands structure */
@@ -111,7 +116,9 @@ int main(int argc, char *argv[]){
 		/* Reseting branch flag */
 		branch_instr = 0;
 
-		printf("Instruction en attente :\n");
+		if(step_mode){
+			printf("Instruction en attente :\n");
+		}
 
 		switch(idInstruction()){
 
@@ -299,6 +306,8 @@ int main(int argc, char *argv[]){
 		if(step_mode){
 			waitUserGo();
 		}
+
+		instr_count++;
 		
 		/* Afficher l'état des registres et de la mémoire data en mode intéractif et pas à pas */
 		if(interactive_mode || step_mode){
@@ -315,7 +324,7 @@ int main(int argc, char *argv[]){
 		}
 
 	/* Simulation currently stopping on a NOP statement */
-	}while(readMIPSRegister(INSTR_REGISTER) != 0);
+	}while(readMIPSRegister(INSTR_REGISTER) != EXIT_INSTR);
 
 	/* Affichage de la mémoire et des registres à la fin de l'émulation */
 	printf("-----[ Final state of the registers ]-----\n");

@@ -67,6 +67,9 @@ typedef enum instr {ADD, ADDI, AND, BEQ, BGTZ, BLEZ, BNE, DIV, J, JAL, JR, LUI, 
 /*MIPS' Register HI */
 #define HI 35
 
+/* MIPS' EXIT Instr */
+#define EXIT_INSTR 0xC0000000
+
 
 /* Instruction's lenght */
 #define INSTR_LEN 9

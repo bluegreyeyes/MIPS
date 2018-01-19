@@ -158,7 +158,7 @@ void bne(Operands operands){
 }
 
 
-void div(Operands operands){
+void div_instr(Operands operands){
   /* Variables */
   int var1, var2, quotient, rest;
 
@@ -183,7 +183,7 @@ void jal(Operands operands){
 
 }
 
-void jr(Operand operands){
+void jr(Operands operands){
   /* Variables */
   int var;
 
@@ -197,7 +197,7 @@ void jr(Operand operands){
 }
 
 
-void lui(Operand operands){
+void lui(Operands operands){
   
 }
 

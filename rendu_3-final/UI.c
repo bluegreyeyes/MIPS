@@ -28,15 +28,22 @@ void waitUserGo(){
 
 
 
-void displayProgram(){
+void displayProgram(int displayCurrentPos){
 
 	int i = 0,
-	    start_addr = readMIPSRegister(PROGRAM_COUNTER),
+	    current_instr_offset = (readMIPSRegister(PROGRAM_COUNTER) - TEXT_MEMORY_START_ADDR)/4,
 	    instr = readTextMemory(0);
 
-	while(instr != 0){
+	while(instr != EXIT_INSTR){
 
-		printf("0x%08X : %08X\n", start_addr + 4*i, instr);
+		printf("0x%08X : %08X", TEXT_MEMORY_START_ADDR + 4*i, instr);
+
+		if(displayCurrentPos && i == current_instr_offset){
+			printf(" <=\n");
+		}
+		else{
+			printf("\n");
+		}
 
 		i++;
 		instr = readTextMemory(i);

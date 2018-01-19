@@ -53,7 +53,7 @@ void waitUserGo();
  *
  *==================================================
  */
-void displayProgram();
+void displayProgram(int displayCurrentPos);
 
 
 /*==================================================

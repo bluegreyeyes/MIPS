@@ -40,8 +40,8 @@ void loadInstructionsInMemory (char* filename){
 
 	}while(1);
 
-	/* Writting a NOP instruction to ensure system stop */
-	writeTextMemory(offset, 0);
+	/* Writting a EXIT instruction to ensure system stop */
+	writeTextMemory(offset, EXIT_INSTR);
 
 	closeFile(filename, instrFile);
 }
@@ -751,6 +751,12 @@ char *readSingleInstruction(FILE *input_stream){
 
 				break;
 
+			case EXIT:
+
+				addTrame(bin_trame, 0, (int []){1,1}, 2);
+
+				break;
+
 			default:
 				printf("Instruction non prise en charge.\n");
 				break;
@@ -759,9 +765,6 @@ char *readSingleInstruction(FILE *input_stream){
 
 		/* Translating binary trame to hexadecimal trame */
 		translateBinTrameToHexa(bin_trame, hexa_trame);
-
-		/* Testing the presence of a comment at the end of the line */
-//		nextLine(input_stream);
 
 
 	return(hexa_trame);
