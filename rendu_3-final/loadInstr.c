@@ -449,19 +449,6 @@ char *readSingleInstruction(FILE *input_stream){
 
 		readInstr(input_stream, instr);
 
-//		/* We have reached the end of the file, exiting the loop */
-//		if(instr[0] == '\0')
-//			break;
-//
-//		/* Reading a blank line, we go to the next reading cycle */
-//		if(instr[0] == '\n')
-//			continue;
-//
-//		if(instr[0] == '#'){
-//			nextLine(input_stream);
-//			continue;
-//		}
-
 		/* Init. of the trame and opcode flag */
 		initTrame(bin_trame, 32);
 		opcode_ok = 0;
@@ -564,51 +551,15 @@ char *readSingleInstruction(FILE *input_stream){
 				break;
 
 			case BEQ:
-
-				if(!opcode_ok){
-					addTrame(bin_trame, 0, (int []){0, 0, 0, 1, 0, 0}, 6);
-					opcode_ok = 1;
-				}
-
 			case BNE:
-
-				if(!opcode_ok){
-					addTrame(bin_trame, 0, (int []){0, 0, 0, 1, 0, 1}, 6);
-					opcode_ok = 1;
-				}
-
-
-				/* Retrieving registers */
-				addRegCode(input_stream, bin_trame, 6);
-				addRegCode(input_stream, bin_trame, 11);
-
-				/* Retrieving imm value */
-				addImmValueCode(input_stream, bin_trame, 16);
-
-				break;
-
-
-
 			case BGTZ:
-
-				if(!opcode_ok){
-					addTrame(bin_trame, 0, (int []){0, 0, 0, 1, 1, 1}, 6);
-					opcode_ok = 1;
-				}
-
 			case BLEZ:
+			case J:
+			case JAL:
+			case JR:
 
-				if(!opcode_ok){
-					addTrame(bin_trame, 0, (int []){0, 0, 0, 1, 1, 0}, 6);
-					opcode_ok = 1;
-				}
-
-
-				/* Retrieving register */
-				addRegCode(input_stream, bin_trame, 6);
-
-				/* Retrieving offset */
-				addImmValueCode(input_stream, bin_trame, 16);
+				printf("This instruction is not available in this mode.\
+					Replacing by a NOP instruction.\n");
 
 				break;
 
@@ -655,20 +606,6 @@ char *readSingleInstruction(FILE *input_stream){
 
 
 
-			case JR:
-
-				if(!opcode_ok){
-					addTrame(bin_trame, 26, (int []){0, 0, 1, 0, 0, 0}, 6);
-					opcode_ok = 1;
-				}
-
-				/* Retrieving register */
-				addRegCode(input_stream, bin_trame, 6);
-
-				break;
-
-
-
 			case MFHI:
 
 				if(!opcode_ok){
@@ -688,27 +625,6 @@ char *readSingleInstruction(FILE *input_stream){
 
 				break;
 
-
-
-			case J:
-
-				if(!opcode_ok){
-					addTrame(bin_trame, 0, (int []){0, 0, 0, 0, 1, 0}, 6);
-					opcode_ok = 1;
-				}
-
-			case JAL:
-
-				if(!opcode_ok){
-					addTrame(bin_trame, 0, (int []){0, 0, 0, 0, 1, 1}, 6);
-					opcode_ok = 1;
-				}
-
-
-				/* Retrieving address */
-				addAddressCode(input_stream, bin_trame, 6);
-
-				break;
 
 
 
@@ -751,14 +667,17 @@ char *readSingleInstruction(FILE *input_stream){
 
 				break;
 
+			/* Not a MIPS instruction, but used to stop the emulator in interactive mode */
 			case EXIT:
 
 				addTrame(bin_trame, 0, (int []){1,1}, 2);
 
 				break;
 
+			case ERROR:
 			default:
-				printf("Instruction non prise en charge.\n");
+				printf("Instruction not supported : Converting in NOP\n");
+				nextLine(stdin);
 				break;
 
 		}

@@ -234,6 +234,8 @@ instr idInstr(char *instr){
 			return(i);
 		}
 	}
+
+	return(ERROR);
 }
 
 

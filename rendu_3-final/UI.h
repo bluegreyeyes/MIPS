@@ -66,7 +66,9 @@ void displayProgram(int displayCurrentPos);
  *
  *==================================================
  */
-
 void printRegister();
+
+
+void displayMemoryState();
 
 #endif

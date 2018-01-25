@@ -161,7 +161,7 @@ int main(int argc, char *argv[]){
 
 			case BLEZ:
 				if(step_mode){
-					printf("BLEZ $%d, $%d, $%d\n", operands.rd, operands.rs, operands.offset <= 32767 ? operands.offset : operands.offset - 65536);
+					printf("BLEZ $%d, %d\n", operands.rs, operands.offset <= 32767 ? operands.offset : operands.offset - 65536);
 				}
 				branch_instr = 1;
 				blez(operands);
@@ -179,7 +179,7 @@ int main(int argc, char *argv[]){
 				if(step_mode){
 					printf("DIV $%d, $%d\n", operands.rs, operands.rt);
 				}
-				/*TODO div(operands);*/
+				div_instr(operands);
 				break;
 
 			case J:
@@ -200,21 +200,21 @@ int main(int argc, char *argv[]){
 				if(step_mode){
 					printf("JR $%d\n", operands.rs);
 				}
-				/*TODO jr(operands);*/
+				jr(operands);
 				break;
 
 			case LUI:
 				if(step_mode){
 					printf("LUI $%d, %d\n", operands.rt, operands.immediate <= 32767 ? operands.immediate : operands.immediate - 65536);
 				}
-				/*TODO lui(operands);*/
+				lui(operands);
 				break;
 
 			case LW:
 				if(step_mode){
 					printf("LW $%d, %d($%d)\n", operands.rt, operands.offset <= 32767 ? operands.offset : operands.offset - 65536, operands.base);
 				}
-				/*TODO lw(operands);*/
+				load(operands);
 				break;
 
 			case MFHI:
@@ -290,14 +290,14 @@ int main(int argc, char *argv[]){
 				if(step_mode){
 					printf("SW $%d, %d($%d)\n", operands.rt, operands.offset <= 32767 ? operands.offset : operands.offset - 65536, operands.base);
 				}
-				/*TODO sw(operands);*/
+				store(operands);
 				break;
 
 			case XOR:
 				if(step_mode){
 					printf("XOR $%d, $%d, $%d\n", operands.rd, operands.rs, operands.rt);
 				}
-				/*TODO xor(operands);*/
+				xor(operands);
 				break;
 
 		}
@@ -313,7 +313,8 @@ int main(int argc, char *argv[]){
 		if(interactive_mode || step_mode){
 
 			printf("-----[ Registers' state ]-----\n");
-			printRegister();
+			//printRegister();
+			displayMemoryState();
 			printf("\n");
 
  		}

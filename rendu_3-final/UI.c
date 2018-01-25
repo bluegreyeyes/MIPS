@@ -62,3 +62,26 @@ void printRegister(){
 
 
 
+void displayMemoryState(){
+
+	int i;
+
+	printf("#########################\n");
+
+	for(i = 0; i < NB_REGISTERS; i++){
+
+		if(i != PROGRAM_COUNTER && i != INSTR_REGISTER){
+
+			printf("# %2d | %8d ## %8x : %8x #\n", i, readMIPSRegister(i), STACK_MEMORY_START_ADDR + 4*i, readDataMemory(i));
+
+		}
+		else{
+
+			printf("# %2d | %8x ## %8x : %8x #\n", i, readMIPSRegister(i), STACK_MEMORY_START_ADDR + 4*i, readDataMemory(i));
+
+		}
+
+		printf("#---------------## %8x : %8x #\n", STACK_MEMORY_START_ADDR + 4*(i+1), readDataMemory(i));
+
+	}
+}
