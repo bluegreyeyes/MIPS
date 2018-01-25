@@ -52,7 +52,17 @@ void jr(Operands operands);
 
 void lui(Operands operands);
 
+
 void load(Operands operands);
+
+
+void MFHI(Operands operands);
+
+
+void MFLO(Operands operands);
+
+
+void Mult(Operands operands);
 
 
 void nop(Operands operands);

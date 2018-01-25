@@ -232,6 +232,50 @@ writeRegister(rt, var + offset);
 }
 
 
+void MFHI(Operands operands){
+  /* Variables */
+  int var;
+
+  /* Code */
+
+  /*Recovering values*/
+  var = readMIPSRegister (HI);
+
+  /*Writing result into register */
+  writeRegister (operands.rd, var);
+}
+
+
+void MFLO(Operands operands){
+  /* Variables */
+  int var;
+
+  /* Code */
+
+  /*Recovering values*/
+  var = readMIPSRegister (LO);
+
+  /*Writing result into register */
+  writeRegister (operands.rd, var);
+}
+
+
+void Mult(Operands operands){
+  /* Variables */
+  int var1, var2, result;
+
+  /* Code */
+
+  /*Recovering values*/
+  var1 = readMIPSRegister (operands.rs);
+  var2 = readMIPSRegister (operands.rt);
+
+  result = var1*var2;
+
+  /*Writing result into register */
+  writeRegister (operands.rd, var);
+}
+
 
 void nop(Operands operands){
 
