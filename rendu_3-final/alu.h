@@ -52,6 +52,8 @@ void jr(Operands operands);
 
 void lui(Operands operands);
 
+void load(Operands operands);
+
 
 void nop(Operands operands);
 
@@ -62,6 +64,7 @@ void or_instr(Operands operands);
 /* Réalise la soustraction de deux valeurs contenues dans des registres et place le résultat dans un troisième registre */
 void sub(Operands operands);
 
+void store(Operands operands);
 
 void xor(Operands operands);
 
