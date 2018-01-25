@@ -3,6 +3,7 @@
 #include "register.h"
 #include "memory.h"
 #include "alu.h"
+#include <string.h>
 
 extern int overflow_counter;
 
@@ -188,10 +189,6 @@ void jump(Operands operands){
 }
 
 
-void jal(Operands operands){
-
-}
-
 void jr(Operands operands){
   /* Variables */
   int var;
@@ -208,13 +205,17 @@ void jr(Operands operands){
 
 void lui(Operands operands){
   /* Variables */
-  int var;
+  int var, result;
 
   /* Code */
 
   /*Recovering values*/
-  var = readMIPSRegister (operands.immediate) << 16;
+  var = readMIPSRegister (operands.immediate) << 16 ;
 
+  result = var || 111111111111111111000000000000000000;
+
+  /*Writing result into the Program Counter */
+writeRegister(operands.rt, result);
 }
 
 void load (Operands operands){
@@ -254,23 +255,6 @@ void MFLO(Operands operands){
 
   /*Recovering values*/
   var = readMIPSRegister (LO);
-
-  /*Writing result into register */
-  writeRegister (operands.rd, var);
-}
-
-
-void Mult(Operands operands){
-  /* Variables */
-  int var1, var2, result;
-
-  /* Code */
-
-  /*Recovering values*/
-  var1 = readMIPSRegister (operands.rs);
-  var2 = readMIPSRegister (operands.rt);
-
-  result = var1*var2;
 
   /*Writing result into register */
   writeRegister (operands.rd, var);
