@@ -213,7 +213,7 @@ void lui(Operands operands){
   /* Code */
 
   /*Recovering values*/
-  var = readMIPSRegister (operands.immediate) << 16
+  var = readMIPSRegister (operands.immediate) << 16;
 
 }
 
@@ -225,10 +225,10 @@ void load (Operands operands){
 
   /*Recovering values*/
   var = readMIPSRegister (operands.base);
-  offset = readMIPSRegister(operands.offset);
+  offset = (operands.offset - STACK_MEMORY_START_ADDR)/4;
 
-  /*Writing result into the Program Counter */
-writeRegister(rt, var + offset);
+  /*Writing result */
+  writeRegister(readMIPSRegister(operands.rt), var + offset);
 }
 
 
@@ -272,17 +272,16 @@ void sub(Operands operands){
 
 void store(Operands operands){
   /* Variables */
-int base, offset, var;
+int offset, var;
 
   /* Code */
 
   /*Recovering values*/
 var = readMIPSRegister (operands.rt);
-base = readMIPSRegister (operands.base);
-offset = readMIPSRegister (operands.offset);
+offset = (operands.offset - STACK_MEMORY_START_ADDR)/4;
 
   /*Writing result into register */
-writeRegister (base + offset, var));
+writeRegister(readMIPSRegister(operands.base) + offset, var);
 }
 
 

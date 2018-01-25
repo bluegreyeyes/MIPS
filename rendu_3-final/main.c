@@ -207,14 +207,14 @@ int main(int argc, char *argv[]){
 				if(step_mode){
 					printf("LUI $%d, %d\n", operands.rt, operands.immediate <= 32767 ? operands.immediate : operands.immediate - 65536);
 				}
-				/*TODO lui(operands);*/
+				lui(operands);
 				break;
 
 			case LW:
 				if(step_mode){
 					printf("LW $%d, %d($%d)\n", operands.rt, operands.offset <= 32767 ? operands.offset : operands.offset - 65536, operands.base);
 				}
-				/*TODO lw(operands);*/
+				load(operands);
 				break;
 
 			case MFHI:
@@ -290,7 +290,7 @@ int main(int argc, char *argv[]){
 				if(step_mode){
 					printf("SW $%d, %d($%d)\n", operands.rt, operands.offset <= 32767 ? operands.offset : operands.offset - 65536, operands.base);
 				}
-				/*TODO sw(operands);*/
+				store(operands);
 				break;
 
 			case XOR:
