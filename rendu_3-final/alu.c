@@ -36,7 +36,7 @@ void addi(Operands operands){
 
     /*Recovering values*/
   var = readMIPSRegister (operands.rs);
-  result = var + operands.immediate;
+  result = var + (operands.immediate <= 32767 ? operands.immediate : operands.immediate - 65536);
 
   if (result <= REGISTER_MAX_VALUE){
       /*Writing result into register */

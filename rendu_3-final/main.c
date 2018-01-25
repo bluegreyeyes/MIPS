@@ -161,7 +161,7 @@ int main(int argc, char *argv[]){
 
 			case BLEZ:
 				if(step_mode){
-					printf("BLEZ $%d, $%d, $%d\n", operands.rd, operands.rs, operands.offset <= 32767 ? operands.offset : operands.offset - 65536);
+					printf("BLEZ $%d, %d\n", operands.rs, operands.offset <= 32767 ? operands.offset : operands.offset - 65536);
 				}
 				branch_instr = 1;
 				blez(operands);
@@ -179,7 +179,7 @@ int main(int argc, char *argv[]){
 				if(step_mode){
 					printf("DIV $%d, $%d\n", operands.rs, operands.rt);
 				}
-				/*TODO div(operands);*/
+				div_instr(operands);
 				break;
 
 			case J:
@@ -200,7 +200,7 @@ int main(int argc, char *argv[]){
 				if(step_mode){
 					printf("JR $%d\n", operands.rs);
 				}
-				/*TODO jr(operands);*/
+				jr(operands);
 				break;
 
 			case LUI:
@@ -297,7 +297,7 @@ int main(int argc, char *argv[]){
 				if(step_mode){
 					printf("XOR $%d, $%d, $%d\n", operands.rd, operands.rs, operands.rt);
 				}
-				/*TODO xor(operands);*/
+				xor(operands);
 				break;
 
 		}
@@ -313,7 +313,8 @@ int main(int argc, char *argv[]){
 		if(interactive_mode || step_mode){
 
 			printf("-----[ Registers' state ]-----\n");
-			printRegister();
+			//printRegister();
+			displayMemoryState();
 			printf("\n");
 
  		}
