@@ -175,7 +175,16 @@ void div_instr(Operands operands){
 
 
 void jump(Operands operands){
+  /* Variables */
+  int var;
 
+  /* Code */
+
+  /*Recovering values*/
+  var = readMIPSRegister (operands.target);
+
+  /*Writing result into register */
+  writeRegister (PROGRAM_COUNTER, var);
 }
 
 
@@ -198,8 +207,30 @@ void jr(Operands operands){
 
 
 void lui(Operands operands){
-  
+  /* Variables */
+  int var;
+
+  /* Code */
+
+  /*Recovering values*/
+  var = readMIPSRegister (operands.immediate) << 16
+
 }
+
+void load (Operands operands){
+  /* Variables */
+  int var, offset;
+
+  /* Code */
+
+  /*Recovering values*/
+  var = readMIPSRegister (operands.base);
+  offset = readMIPSRegister(operands.offset);
+
+  /*Writing result into the Program Counter */
+writeRegister(rt, var + offset);
+}
+
 
 
 void nop(Operands operands){
@@ -237,6 +268,21 @@ void sub(Operands operands){
 
     /*Writing result into register */
   writeRegister (operands.rd, var1 - var2);
+}
+
+void store(Operands operands){
+  /* Variables */
+int base, offset, var;
+
+  /* Code */
+
+  /*Recovering values*/
+var = readMIPSRegister (operands.rt);
+base = readMIPSRegister (operands.base);
+offset = readMIPSRegister (operands.offset);
+
+  /*Writing result into register */
+writeRegister (base + offset, var));
 }
 
 
