@@ -56,7 +56,28 @@ void displayProgram(int displayCurrentPos){
 void printRegister(){
   int index ;
   for (index = 0; index < NB_REGISTERS; index++){
-    printf("Registre n°%d = %d\n",index,readMIPSRegister(index));
+		switch (index){
+			case 32 :
+				printf("Program counter = %d\n",index,readMIPSRegister(index));
+				break;
+
+			case 33 :
+				printf("Instruction register = %d\n",index,readMIPSRegister(index));
+				break;
+
+
+			case 34 :
+				printf("Register LO = %d\n",index,readMIPSRegister(index));
+				break;
+
+			case 35 :
+				printf("Register HI = %d\n",index,readMIPSRegister(index));
+				break;
+
+			default :
+    		printf("Registre n°%d = %d\n",index,readMIPSRegister(index));
+				break;
+		}
   }
 }
 
