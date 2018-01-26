@@ -205,17 +205,15 @@ void jr(Operands operands){
 
 void lui(Operands operands){
   /* Variables */
-  int var, result;
+  int var;
 
   /* Code */
 
   /*Recovering values*/
   var = readMIPSRegister (operands.immediate) << 16 ;
 
-  result = var || 111111111111111111000000000000000000;
-
   /*Writing result into the Program Counter */
-writeRegister(operands.rt, result);
+writeRegister(operands.rt, var);
 }
 
 void load (Operands operands){
@@ -258,6 +256,25 @@ void MFLO(Operands operands){
 
   /*Writing result into register */
   writeRegister (operands.rd, var);
+}
+
+void Mult(Operands operands){
+  /* Variables */
+  int var1, var2, result, hi, lo;
+
+  /* Code */
+
+  /*Recovering values*/
+  var1 = readMIPSRegister (operands.rs);
+  var2 = readMIPSRegister (operands.rt);
+
+  result = var1*var2;
+  hi = result && 0xFFFFFFFFF00000000 >> 32;
+  lo = result && 0x000000000FFFFFFFF;
+
+  /*Writing result into register */
+  writeRegister (LO, lo);
+  writeRegister (HI, hi);
 }
 
 

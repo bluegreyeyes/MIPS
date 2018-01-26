@@ -60,6 +60,9 @@ void MFHI(Operands operands);
 void MFLO(Operands operands);
 
 
+void Mult(Operands operands);
+
+
 void nop(Operands operands);
 
 
