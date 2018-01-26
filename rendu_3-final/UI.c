@@ -58,20 +58,20 @@ void printRegister(){
   for (index = 0; index < NB_REGISTERS; index++){
 		switch (index){
 			case 32 :
-				printf("Program counter = %d\n",index,readMIPSRegister(index));
+				printf("Program counter = %d\n",readMIPSRegister(index));
 				break;
 
 			case 33 :
-				printf("Instruction register = %d\n",index,readMIPSRegister(index));
+				printf("Instruction register = %d\n",readMIPSRegister(index));
 				break;
 
 
 			case 34 :
-				printf("Register LO = %d\n",index,readMIPSRegister(index));
+				printf("Register LO = %d\n",readMIPSRegister(index));
 				break;
 
 			case 35 :
-				printf("Register HI = %d\n",index,readMIPSRegister(index));
+				printf("Register HI = %d\n",readMIPSRegister(index));
 				break;
 
 			default :
@@ -87,13 +87,32 @@ void displayMemoryState(){
 
 	int i;
 
-	printf("#########################\n");
+	printf("########################################\n");
+	printf("#   Registers   ##     Data Memory     #\n");
+	printf("########################################\n");
+	printf("# N° |   Value  ##  Address  |  Value  #\n");
+	printf("########################################\n");
 
 	for(i = 0; i < NB_REGISTERS; i++){
 
-		if(i != PROGRAM_COUNTER && i != INSTR_REGISTER){
+		if(i == PROGRAM_COUNTER){
 
-			printf("# %2d | %8d ## %8x : %8x #\n", i, readMIPSRegister(i), STACK_MEMORY_START_ADDR + 4*i, readDataMemory(i));
+			printf("# PC | %8d ## %8x : %8x #\n", i, readMIPSRegister(i), STACK_MEMORY_START_ADDR + 4*i, readDataMemory(i));
+
+		}
+		else if(i == INSTR_REGISTER){
+
+			printf("# IR | %8d ## %8x : %8x #\n", i, readMIPSRegister(i), STACK_MEMORY_START_ADDR + 4*i, readDataMemory(i));
+
+		}
+		else if(i == HI){
+
+			printf("# HI | %8d ## %8x : %8x #\n", i, readMIPSRegister(i), STACK_MEMORY_START_ADDR + 4*i, readDataMemory(i));
+
+		}
+		else if(i == LO){
+
+			printf("# LO | %8d ## %8x : %8x #\n", i, readMIPSRegister(i), STACK_MEMORY_START_ADDR + 4*i, readDataMemory(i));
 
 		}
 		else{
@@ -105,4 +124,15 @@ void displayMemoryState(){
 		printf("#---------------## %8x : %8x #\n", STACK_MEMORY_START_ADDR + 4*(i+1), readDataMemory(i));
 
 	}
+	printf("########################################\n");
+
+}
+
+
+
+void printCredits(){
+
+	printf("-----[ MIPS Emulator ]-----\n\n");
+	printf("This program was designed by Axelle LE POURSOT and Arthur DESUERT\n in the context of an Esisar project.\n");
+        printf("It's goal is to emulate the behavior of a MIPS chip and to display\n the memory of the chip while on process.\n\n"); 
 }

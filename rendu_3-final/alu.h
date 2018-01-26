@@ -54,13 +54,13 @@ void lui(Operands operands);
 void load(Operands operands);
 
 
-void MFHI(Operands operands);
+void mfhi(Operands operands);
 
 
-void MFLO(Operands operands);
+void mflo(Operands operands);
 
 
-void Mult(Operands operands);
+void mult(Operands operands);
 
 
 void nop(Operands operands);

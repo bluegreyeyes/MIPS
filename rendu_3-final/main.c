@@ -51,6 +51,7 @@ int main(int argc, char *argv[]){
 	/* Code */
 
 	initializingRegisters();
+	printCredits();
 
 	/* Checking if an argument was passed to the program */
 	if(argc > 1){
@@ -186,7 +187,7 @@ int main(int argc, char *argv[]){
 				if(step_mode){
 					printf("J %d\n", operands.target);
 				}
-				/*TODO jump(operands);*/
+				jump(operands);
 				break;
 
 			case JAL:
@@ -221,21 +222,21 @@ int main(int argc, char *argv[]){
 				if(step_mode){
 					printf("MFHI $%d\n", operands.rd);
 				}
-				/*TODO mfhi(operands);*/
+				mfhi(operands);
 				break;
 
 			case MFLO:
 				if(step_mode){
 					printf("MFLO $%d\n", operands.rd);
 				}
-				/*TODO mflo(operands);*/
+				mflo(operands);
 				break;
 
 			case MULT:
 				if(step_mode){
 					printf("MULT $%d, $%d\n", operands.rs, operands.rt);
 				}
-				/*TODO mult(operands);*/
+				mult(operands);
 				break;
 
 			case NOP:
@@ -312,8 +313,7 @@ int main(int argc, char *argv[]){
 		/* Afficher l'état des registres et de la mémoire data en mode intéractif et pas à pas */
 		if(interactive_mode || step_mode){
 
-			printf("-----[ Registers' state ]-----\n");
-			//printRegister();
+			printf("-----[ MIPS' state ]-----\n");
 			displayMemoryState();
 			printf("\n");
 
@@ -328,8 +328,8 @@ int main(int argc, char *argv[]){
 	}while(readMIPSRegister(INSTR_REGISTER) != EXIT_INSTR);
 
 	/* Affichage de la mémoire et des registres à la fin de l'émulation */
-	printf("-----[ Final state of the registers ]-----\n");
-	printRegister();
+	printf("-----[ Final state of the MIPS ]-----\n");
+	displayMemoryState();
 	printf("\n");
 
 	//printf("-----[ Finale state of the data mem ]-----\n");

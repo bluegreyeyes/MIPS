@@ -231,7 +231,7 @@ void load (Operands operands){
 }
 
 
-void MFHI(Operands operands){
+void mfhi(Operands operands){
   /* Variables */
   int var;
 
@@ -245,7 +245,7 @@ void MFHI(Operands operands){
 }
 
 
-void MFLO(Operands operands){
+void mflo(Operands operands){
   /* Variables */
   int var;
 
@@ -258,9 +258,9 @@ void MFLO(Operands operands){
   writeRegister (operands.rd, var);
 }
 
-void Mult(Operands operands){
+void mult(Operands operands){
   /* Variables */
-  int var1, var2, result, hi, lo;
+  long int var1, var2, result, hi, lo;
 
   /* Code */
 

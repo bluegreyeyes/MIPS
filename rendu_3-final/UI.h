@@ -71,4 +71,8 @@ void printRegister();
 
 void displayMemoryState();
 
+
+void printCredits();
+
+
 #endif
